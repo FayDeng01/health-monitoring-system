@@ -3975,7 +3975,8 @@ $('submitBtn').addEventListener('click', async ()=>{
     travelDetail: travelDetail === '其他' ? travelOtherText : travelDetail,
     otherSymptom: otherSymptomText,
     remark: $('remarkInput').value.trim(),
-    submittedAt: new Date().toISOString()
+    submittedAt: new Date().toISOString(),
+    created_at: new Date().toISOString()
   };
 
   // Save
@@ -4162,7 +4163,7 @@ $('exportBtn').addEventListener('click', async ()=>{
     r.travelDetail||'',
     (r.epi||[]).filter(e=>!e.includes('风险地区旅居史')).join('/'),
     r.remark,
-    r.submittedAt
+    r.created_at || r.submittedAt
   ]);
   
   let csv = '\uFEFF' + headers.join(',') + '\n';
