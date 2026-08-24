@@ -5,6 +5,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>东城社区卫生服务中心 · 每日体温监测</title>
+<script src="https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.19.1/cloudbase.full.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--primary:#0d9488;--primary-light:#14b8a6;--primary-dark:#0f766e;--primary-bg:#f0fdfa;--danger:#ef4444;--danger-bg:#fef2f2;--warning:#f59e0b;--warning-bg:#fffbeb;--success:#22c55e;--gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;--radius:14px;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.12)}
@@ -3452,20 +3453,10 @@ function tcbReady(){ return TCB_ENV_ID !== 'YOUR_ENV_ID'; }
 let tcbInited = false;
 async function initTcb(){
   if(tcbInited) return;
-  const win = window;
-  if(!win.cloudbase){
-    await new Promise((resolve, reject)=>{
-      const script = document.createElement('script');
-      script.src = 'https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.19.1/cloudbase.full.js';
-      script.onload = ()=>{
-        if(win.cloudbase) resolve();
-        else reject(new Error('TCB SDK加载后未找到cloudbase对象'));
-      };
-      script.onerror = ()=>reject(new Error('TCB SDK加载失败'));
-      document.head.appendChild(script);
-    });
+  if(typeof window.cloudbase === 'undefined'){
+    throw new Error('TCB SDK未加载，请检查网络');
   }
-  const app = win.cloudbase.init({ env: TCB_ENV_ID });
+  const app = window.cloudbase.init({ env: TCB_ENV_ID });
   await app.auth().anonymousAuthProvider().signIn();
   tcbInited = true;
 }
