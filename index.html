@@ -3461,7 +3461,7 @@ async function sbReq(method, path, body){
 
 async function getAllRecords(date){
   try{
-    const q = date ? '?date=eq.'+date+'&select=*&order=submittedat.desc':'?select=*&order=submittedat.desc';
+    const q = date ? '?date=eq.'+date+'&select=*&order=created_at.desc':'?select=*&order=created_at.desc';
     return await sbReq('GET','/TemperatureRecord'+q);
   }catch(e){
     console.error('Supabase读取失败，回退本地存储',e);
@@ -3477,8 +3477,7 @@ async function saveRecord(record){
     phone: record.phone, temp: record.temp, fever: record.fever,
     hassymptom: record.hasSymptom, symptoms: record.symptoms, epi: record.epi,
     hastravelrisk: record.hasTravelRisk, traveldetail: record.travelDetail,
-    othersymptom: record.otherSymptom, remark: record.remark,
-    submittedat: record.submittedAt
+    othersymptom: record.otherSymptom, remark: record.remark
   };
   try{
     const existing = await sbReq('GET','/TemperatureRecord?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
