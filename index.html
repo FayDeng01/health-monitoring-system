@@ -3932,16 +3932,16 @@ $('submitBtn').addEventListener('click', async ()=>{
     return;
   }
 
-  // Validate travel detail if 旅居史 chip selected
+  // Validate travel detail if 旅居史 chip selected (must not be empty)
   const hasTravelChip = selectedEpi.has('近14天风险地区旅居史');
-  if(hasTravelChip && !travelDetail){
-    showToast('请选择旅居地区', '⚠');
-    $('travelDetailSelect').focus();
+  if(hasTravelChip && !travelOtherText){
+    showToast('请填写旅居地区及时间', '⚠');
+    $('travelOtherInput').focus();
     return;
   }
-  if(hasTravelChip && travelDetail === '其他' && !travelOtherText){
-    showToast('请补充说明具体地区及时间', '⚠');
-    $('travelOtherInput').focus();
+  if(selectedEpi.has('离莞') && !leaveGZOtherText){
+    showToast('请填写离莞地区及时间', '⚠');
+    $('leaveGZOtherInput').focus();
     return;
   }
 
