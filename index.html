@@ -3483,12 +3483,23 @@ async function saveRecord(record){
       await sbReq('POST','/temp_log', payload);
     }
   }catch(e){
-    console.error('Supabase保存失败，回退本地存储',e);
-    const records = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
-    const idx = records.findIndex(r=>r.date===record.date && r.name===record.name && r.dept===record.dept);
-    if(idx>=0) records[idx]=record; else records.push(record);
-    localStorage.setItem('dc_temp_records', JSON.stringify(records));
-    throw e;
+    // Retry once after 1 second (Supabase schema cache may need warm-up)
+    try{
+      await new Promise(r=>setTimeout(r,1000));
+      const existing2 = await sbReq('GET','/temp_log?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
+      if(existing2 && existing2.length>0){
+        await sbReq('PATCH','/temp_log?id=eq.'+existing2[0].id, payload);
+      }else{
+        await sbReq('POST','/temp_log', payload);
+      }
+    }catch(e2){
+      console.error('Supabase保存失败，回退本地存储',e2);
+      const records = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
+      const idx = records.findIndex(r=>r.date===record.date && r.name===record.name && r.dept===record.dept);
+      if(idx>=0) records[idx]=record; else records.push(record);
+      localStorage.setItem('dc_temp_records', JSON.stringify(records));
+      throw e2;
+    }
   }
 }
 
@@ -4021,12 +4032,13 @@ $('submitBtn').addEventListener('click', async ()=>{
     document.querySelectorAll('#epiChips .epi-chip').forEach(c=>c.classList.remove('active'));
     $('remarkInput').value = '';
     // Reset travel
-    travelDetail = '';
     travelOtherText = '';
     $('travelDetailWrap').classList.remove('show');
-    $('travelDetailSelect').value = '';
-    $('travelOtherInput').style.display = 'none';
     $('travelOtherInput').value = '';
+    // Reset leaveGZ
+    leaveGZOtherText = '';
+    $('leaveGZWrap').classList.remove('show');
+    $('leaveGZOtherInput').value = '';
     // Reset other
     otherSymptomText = '';
     $('otherSymptomWrap').classList.remove('show');
