@@ -3462,7 +3462,7 @@ async function sbReq(method, path, body){
 async function getAllRecords(date){
   try{
     const q = date ? '?date=eq.'+date+'&select=*&order=created_at.desc':'?select=*&order=created_at.desc';
-    return await sbReq('GET','/TemperatureRecord'+q);
+    return await sbReq('GET','/temp_log'+q);
   }catch(e){
     console.error('Supabase读取失败，回退本地存储',e);
     const all = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
@@ -3480,11 +3480,11 @@ async function saveRecord(record){
     othersymptom: record.otherSymptom, remark: record.remark
   };
   try{
-    const existing = await sbReq('GET','/TemperatureRecord?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
+    const existing = await sbReq('GET','/temp_log?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
     if(existing && existing.length>0){
-      await sbReq('PATCH','/TemperatureRecord?id=eq.'+existing[0].id, payload);
+      await sbReq('PATCH','/temp_log?id=eq.'+existing[0].id, payload);
     }else{
-      await sbReq('POST','/TemperatureRecord', payload);
+      await sbReq('POST','/temp_log', payload);
     }
   }catch(e){
     console.error('Supabase保存失败，回退本地存储',e);
