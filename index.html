@@ -3461,7 +3461,8 @@ async function initTcb(){
       document.head.appendChild(script);
     });
   }
-  cloudbase.init({ env: TCB_ENV_ID });
+  const app = cloudbase.init({ env: TCB_ENV_ID });
+  await app.auth().anonymousAuthProvider().signIn();
   tcbInited = true;
 }
 
