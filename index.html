@@ -3461,7 +3461,7 @@ async function sbReq(method, path, body){
 
 async function getAllRecords(date){
   try{
-    const q = date ? '?date=eq.'+date+'&select=*&order=submittedAt.desc':'?select=*&order=submittedAt.desc';
+    const q = date ? '?date=eq.'+date+'&select=*&order=submittedat.desc':'?select=*&order=submittedat.desc';
     return await sbReq('GET','/TemperatureRecord'+q);
   }catch(e){
     console.error('Supabase读取失败，回退本地存储',e);
@@ -3471,12 +3471,21 @@ async function getAllRecords(date){
 }
 
 async function saveRecord(record){
+  // map camelCase to lowercase for PostgreSQL
+  const payload = {
+    date: record.date, name: record.name, dept: record.dept, post: record.post,
+    phone: record.phone, temp: record.temp, fever: record.fever,
+    hassymptom: record.hasSymptom, symptoms: record.symptoms, epi: record.epi,
+    hastravelrisk: record.hasTravelRisk, traveldetail: record.travelDetail,
+    othersymptom: record.otherSymptom, remark: record.remark,
+    submittedat: record.submittedAt
+  };
   try{
     const existing = await sbReq('GET','/TemperatureRecord?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
     if(existing && existing.length>0){
-      await sbReq('PATCH','/TemperatureRecord?id=eq.'+existing[0].id, record);
+      await sbReq('PATCH','/TemperatureRecord?id=eq.'+existing[0].id, payload);
     }else{
-      await sbReq('POST','/TemperatureRecord', record);
+      await sbReq('POST','/TemperatureRecord', payload);
     }
   }catch(e){
     console.error('Supabase保存失败，回退本地存储',e);
