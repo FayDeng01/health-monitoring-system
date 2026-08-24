@@ -3452,16 +3452,20 @@ function tcbReady(){ return TCB_ENV_ID !== 'YOUR_ENV_ID'; }
 let tcbInited = false;
 async function initTcb(){
   if(tcbInited) return;
-  if(typeof cloudbase === 'undefined'){
+  const win = window;
+  if(!win.cloudbase){
     await new Promise((resolve, reject)=>{
       const script = document.createElement('script');
-      script.src = 'https://res.wx.qq.com/open/js/cloudbase/1.1.0/cloud.js';
-      script.onload = resolve;
+      script.src = 'https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.19.1/cloudbase.full.js';
+      script.onload = ()=>{
+        if(win.cloudbase) resolve();
+        else reject(new Error('TCB SDK加载后未找到cloudbase对象'));
+      };
       script.onerror = ()=>reject(new Error('TCB SDK加载失败'));
       document.head.appendChild(script);
     });
   }
-  const app = cloudbase.init({ env: TCB_ENV_ID });
+  const app = win.cloudbase.init({ env: TCB_ENV_ID });
   await app.auth().anonymousAuthProvider().signIn();
   tcbInited = true;
 }
