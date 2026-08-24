@@ -5,7 +5,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <title>东城社区卫生服务中心 · 每日体温监测</title>
-<script src="https://imgcache.qq.com/qcloud/cloudbase-js-sdk/1.19.1/cloudbase.full.js"></script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{--primary:#0d9488;--primary-light:#14b8a6;--primary-dark:#0f766e;--primary-bg:#f0fdfa;--danger:#ef4444;--danger-bg:#fef2f2;--warning:#f59e0b;--warning-bg:#fffbeb;--success:#22c55e;--gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-400:#9ca3af;--gray-500:#6b7280;--gray-600:#4b5563;--gray-700:#374151;--gray-800:#1f2937;--gray-900:#111827;--radius:14px;--shadow:0 2px 12px rgba(0,0,0,.06);--shadow-lg:0 8px 30px rgba(0,0,0,.12)}
@@ -3441,83 +3441,50 @@ function todayStr(){
 }
 function isFever(temp){return temp >= 37.3}
 
-// ===== 腾讯云开发 Backend =====
-// 注册地址: https://console.cloud.tencent.com/tcb
-// 1. 微信扫码登录 → 2. 新建环境 → 3. 进入"数据库"创建集合 TemperatureRecord
-// 4. 进入"环境-登录授权"开启"未登录模式"
-// 5. 数据库权限设为"所有用户可读，仅创建者可写"（或更开放）
-const TCB_ENV_ID = 'temp-monitor-d5ga6dtcld97c53ed';  // 腾讯云开发环境ID
+// ===== Supabase Backend =====
+const SB_URL = 'https://kimjnzpymyhqafufwomv.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtpbWpuenB5bXlocWFmdWZ3b212Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1MzczMzAsImV4cCI6MjEwMzExMzMzMH0.WyrS73XNvMU8EVf81VDE2AF5teKcaYtE_tvwttPfino';
 
-function tcbReady(){ return TCB_ENV_ID !== 'YOUR_ENV_ID'; }
-
-let tcbInited = false;
-async function initTcb(){
-  if(tcbInited) return;
-  if(typeof window.cloudbase === 'undefined'){
-    throw new Error('TCB SDK未加载，请检查网络');
+async function sbReq(method, path, body){
+  const opts = {
+    method,
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json'}
+  };
+  if(body) opts.body = JSON.stringify(body);
+  const res = await fetch(SB_URL+'/rest/v1'+path, opts);
+  if(!res.ok){
+    const txt = await res.text();
+    throw new Error('请求失败 '+res.status+': '+txt);
   }
-  const app = window.cloudbase.init({ env: TCB_ENV_ID });
-  await app.auth().anonymousAuthProvider().signIn();
-  tcbInited = true;
-}
-
-async function getRecords(){
-  if(!tcbReady()){
-    try{ return JSON.parse(localStorage.getItem('dc_temp_records')||'[]') }catch{ return [] }
-  }
-  await initTcb();
-  const db = cloudbase.database();
-  const { data } = await db.collection('TemperatureRecord')
-    .where({ date: todayStr() })
-    .orderBy('submittedAt', 'desc')
-    .get();
-  return (data || []).map(r=>({
-    id: r._id, date: r.date, name: r.name, dept: r.dept, post: r.post,
-    phone: r.phone, temp: r.temp, fever: r.fever, hasSymptom: r.hasSymptom,
-    symptoms: r.symptoms || [], epi: r.epi || [], hasTravelRisk: r.hasTravelRisk,
-    travelDetail: r.travelDetail, otherSymptom: r.otherSymptom, remark: r.remark,
-    submittedAt: r.submittedAt
-  }));
+  return res.status===204?[]:res.json();
 }
 
 async function getAllRecords(date){
-  if(!tcbReady()){
-    try{
-      const all = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
-      return date ? all.filter(r=>r.date===date) : all;
-    }catch{ return [] }
+  try{
+    const q = date ? '?date=eq.'+date+'&select=*&order=submittedAt.desc':'?select=*&order=submittedAt.desc';
+    return await sbReq('GET','/TemperatureRecord'+q);
+  }catch(e){
+    console.error('Supabase读取失败，回退本地存储',e);
+    const all = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
+    return date?all.filter(r=>r.date===date):all;
   }
-  await initTcb();
-  const db = cloudbase.database();
-  let query = db.collection('TemperatureRecord').orderBy('submittedAt', 'desc');
-  if(date) query = query.where({ date });
-  const { data } = await query.get();
-  return (data || []).map(r=>({
-    id: r._id, date: r.date, name: r.name, dept: r.dept, post: r.post,
-    phone: r.phone, temp: r.temp, fever: r.fever, hasSymptom: r.hasSymptom,
-    symptoms: r.symptoms || [], epi: r.epi || [], hasTravelRisk: r.hasTravelRisk,
-    travelDetail: r.travelDetail, otherSymptom: r.otherSymptom, remark: r.remark,
-    submittedAt: r.submittedAt
-  }));
 }
 
 async function saveRecord(record){
-  if(!tcbReady()){
+  try{
+    const existing = await sbReq('GET','/TemperatureRecord?date=eq.'+record.date+'&name=eq.'+encodeURIComponent(record.name)+'&dept=eq.'+encodeURIComponent(record.dept)+'&select=id');
+    if(existing && existing.length>0){
+      await sbReq('PATCH','/TemperatureRecord?id=eq.'+existing[0].id, record);
+    }else{
+      await sbReq('POST','/TemperatureRecord', record);
+    }
+  }catch(e){
+    console.error('Supabase保存失败，回退本地存储',e);
     const records = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
     const idx = records.findIndex(r=>r.date===record.date && r.name===record.name && r.dept===record.dept);
-    if(idx >= 0) records[idx] = record; else records.push(record);
+    if(idx>=0) records[idx]=record; else records.push(record);
     localStorage.setItem('dc_temp_records', JSON.stringify(records));
-    return;
-  }
-  await initTcb();
-  const db = cloudbase.database();
-  const { data } = await db.collection('TemperatureRecord')
-    .where({ date: record.date, name: record.name, dept: record.dept })
-    .get();
-  if(data && data.length > 0){
-    await db.collection('TemperatureRecord').doc(data[0]._id).update({ data: record });
-  } else {
-    await db.collection('TemperatureRecord').add({ data: record });
+    throw e;
   }
 }
 
