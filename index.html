@@ -137,7 +137,7 @@ input:focus,select:focus,textarea:focus{outline:none}
 /* Remark */
 .remark-input{width:100%;padding:10px 12px;border:1.5px solid var(--gray-200);border-radius:10px;font-size:14px;resize:none;min-height:60px;transition:border-color .2s}
 .remark-input:focus{border-color:var(--primary)}
-.remark-hint{font-size:11px;color:var(--gray-400);margin-top:4px}
+.remark-hint{font-size:11px;color:#e74c3c;font-weight:600;margin-top:4px;line-height:1.5}
 
 /* Submit */
 .submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;border-radius:12px;font-size:16px;font-weight:600;letter-spacing:2px;box-shadow:0 4px 14px rgba(13,148,136,.3);transition:transform .1s}
@@ -268,19 +268,10 @@ input:focus,select:focus,textarea:focus{outline:none}
       <div class="card-title">体温测量</div>
       <div class="card-content">
         <div class="temp-row">
-          <input id="tempInput" class="temp-input" type="number" placeholder="36.5" step="0.1" min="34" max="43" inputmode="decimal">
+          <input id="tempInput" class="temp-input" type="number" placeholder="请输入体温" step="0.1" min="34" max="43" inputmode="decimal">
           <span class="temp-unit">℃</span>
         </div>
-        <div class="temp-quick" id="tempQuick">
-          <button data-v="36.0">36.0</button>
-          <button data-v="36.3">36.3</button>
-          <button data-v="36.5">36.5</button>
-          <button data-v="36.8">36.8</button>
-          <button data-v="37.0">37.0</button>
-          <button data-v="37.3">37.3</button>
-          <button data-v="37.5">37.5</button>
-          <button data-v="38.0">38.0</button>
-        </div>
+        <div class="temp-hint" style="font-size:12px;color:#888;margin-top:4px;">请手动输入体温值</div>
         <div class="temp-status" id="tempStatus"></div>
       </div>
     </div>
@@ -368,7 +359,7 @@ input:focus,select:focus,textarea:focus{outline:none}
       <div class="card-title">备注</div>
       <div class="card-content">
         <textarea class="remark-input" id="remarkInput" placeholder="如有发热，请说明就诊情况..."></textarea>
-        <div class="remark-hint" id="remarkHint">如有发热，请填写是否已就诊、就诊机构及诊断结果</div>
+        <div class="remark-hint" id="remarkHint">严格落实逢热必检，如有发热，请到中心/站点挂号就诊做两热检测；若在外镇/医疗机构就诊，请说明就诊情况及检测结果</div>
       </div>
     </div>
 
@@ -396,15 +387,15 @@ input:focus,select:focus,textarea:focus{outline:none}
       <div class="num" id="statTotal">366</div>
       <div class="label">应报人数</div>
     </div>
-    <div class="stat-card normal">
+    <div class="stat-card normal" style="cursor:pointer" onclick="showStatList('submitted')">
       <div class="num" id="statSubmitted">0</div>
       <div class="label">已上报</div>
     </div>
-    <div class="stat-card warning">
+    <div class="stat-card warning" style="cursor:pointer" onclick="showStatList('pending')">
       <div class="num" id="statPending">366</div>
       <div class="label">未上报</div>
     </div>
-    <div class="stat-card danger">
+    <div class="stat-card danger" style="cursor:pointer" onclick="showStatList('abnormal')">
       <div class="num" id="statAbnormal">0</div>
       <div class="label">异常人数</div>
     </div>
@@ -441,2943 +432,21 @@ input:focus,select:focus,textarea:focus{outline:none}
   <div class="unsub-list" id="unsubList"><div class="unsub-group-label">上桥站（8人）</div><div class="unsub-item"><span class="ui-name">萧秀兰</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谢水良</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">彭丽荷</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">吴锦霏</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">柯银燕</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钱梓瑜</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">邓玉曼</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">罗光敏</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">下桥站（1人）</div><div class="unsub-item"><span class="ui-name">莫明燕</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">东奉站（1人）</div><div class="unsub-item"><span class="ui-name">徐伙连</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">东泰站（17人）</div><div class="unsub-item"><span class="ui-name">翟伟明</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陆琼梅</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈秀霞</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钱树娟</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">李华丽</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">吴利娜</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">张伟乐</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">唐显美</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李俊霞</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">卢楚婷</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">蔡玉贤</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">吴凤珍</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黎淑君</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">曾佳美</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钱婉玲</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">林民庭</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">罗蕴灵</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">中心主任（1人）</div><div class="unsub-item"><span class="ui-name">袁仲勋</span><span class="ui-dept">药剂</span></div><div class="unsub-group-label">中心儿保（5人）</div><div class="unsub-item"><span class="ui-name">谢丽娟</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">刘丽国</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">尹伟茹</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">张家华</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">徐美玲</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">中心副主任（1人）</div><div class="unsub-item"><span class="ui-name">罗燕笑</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">中心办公室（6人）</div><div class="unsub-item"><span class="ui-name">黄浩昭</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">茹少红</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈怡</span><span class="ui-dept">管理人员</span></div><div class="unsub-item"><span class="ui-name">蔡慧娴</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">陈晓园</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">吴丽慧</span><span class="ui-dept">管理人员</span></div><div class="unsub-group-label">中心医务办（5人）</div><div class="unsub-item"><span class="ui-name">周洁珊</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">何涛</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">霍杏芳</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">兰柳岸</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">刘红</span><span class="ui-dept">护士</span></div><div class="unsub-group-label">中心后勤（5人）</div><div class="unsub-item"><span class="ui-name">叶炯渠</span><span class="ui-dept">司机</span></div><div class="unsub-item"><span class="ui-name">袁松发</span><span class="ui-dept">司机</span></div><div class="unsub-item"><span class="ui-name">袁刘锐</span><span class="ui-dept">电工</span></div><div class="unsub-item"><span class="ui-name">袁暖登</span><span class="ui-dept">厨师</span></div><div class="unsub-item"><span class="ui-name">黄衬兴</span><span class="ui-dept">厨工</span></div><div class="unsub-group-label">中心总务办（5人）</div><div class="unsub-item"><span class="ui-name">方兆</span><span class="ui-dept">管理人员</span></div><div class="unsub-item"><span class="ui-name">袁映章</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">钟凤兰</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">周桂芬</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">张莹</span><span class="ui-dept">收费</span></div><div class="unsub-group-label">中心护理办（1人）</div><div class="unsub-item"><span class="ui-name">邓积银</span><span class="ui-dept">护士</span></div><div class="unsub-group-label">中心药剂办（6人）</div><div class="unsub-item"><span class="ui-name">卢志伟</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">莫凤青</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">陈美蓉</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">谢皓</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">冯婷</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">倪琳</span><span class="ui-dept">药剂</span></div><div class="unsub-group-label">中心计免（7人）</div><div class="unsub-item"><span class="ui-name">谢桂香</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">任华连</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">余润娇</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">陈伟欢</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄水娟</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">戴沛如</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">冯倩</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">中心门诊（110人）</div><div class="unsub-item"><span class="ui-name">胡海霞</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">贾雪梅</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李晓燕</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">邓贺春</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">文华庭</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">欧阳雪琴</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">邓柱均</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">秦柳平</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">付斯洁</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">于长江</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">唐明</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">魏燕萍</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">蓝艳梅</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">包伟党</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">丁晓锋</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">袁换桂</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">卢淑娜</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">袁佩君</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">翟海燕</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">香巧婵</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">莫翠连</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">沈小城</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">欧彩莲</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">梁钻如</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">林潇</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">成惠敏</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">徐秀环</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钱葵弟</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">巫凤玲</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钟燕</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">方芹</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">袁韵珊</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黎文君</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">刘小凤</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">刘肖雯</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">潘莉</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">阙中桂</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">肖李梅</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">莫晓霞</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄媚</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">钟晓敏</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">李想</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黎颖珊</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">邱洪</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">卢洁莹</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">张洪艳</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谢丽姣</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">庾钰青</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">钟婷</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">刘倩</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">袁伟文</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陈梦</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈苏女</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">谢汉洪</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">卢佳茜</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">喻小芳</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">叶雅雯</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">袁淑英</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">王杰</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">袁海东</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">贺露</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">江琴花</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟岑</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">温婉玲</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">纪晓丽</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黄圣霖</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">朱惠瑜</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">夏骥</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">胡跃琴</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">游子琳</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">胡志强</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">蒋艳平</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">余娟娟</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陈羽佳</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">尹雪莹</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李嫣</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">王安怡</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">莫勇健</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黄建</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李斌</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">曹玲</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">卢丽慧</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">叶振威</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">陈彦</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">曾素溶</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈满成</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">龙祖凡</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">刘丽兰</span><span class="ui-dept">康复</span></div><div class="unsub-item"><span class="ui-name">孙光绪</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">徐晓林</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">李茂辉</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">尹铁仔</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">粟正义</span><span class="ui-dept">中级保安岗位</span></div><div class="unsub-item"><span class="ui-name">严明</span><span class="ui-dept">中级保安岗位</span></div><div class="unsub-item"><span class="ui-name">谢帆</span><span class="ui-dept">中级保安岗位</span></div><div class="unsub-item"><span class="ui-name">张涛</span><span class="ui-dept">中级保安岗位</span></div><div class="unsub-item"><span class="ui-name">李翠兰</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">曹桂兰</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">黄凤章</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">叶福嫦</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">林琼兰</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">刘新凤</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">黄玉莲</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">张祝香</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">宋培艳</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">方培芝</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">杨旻</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">赖秀凝</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">蒋伟英</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">刘付铜英</span><span class="ui-dept">中心厨房保洁</span></div><div class="unsub-group-label">余屋站（9人）</div><div class="unsub-item"><span class="ui-name">母少刚</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">颜显扬</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">余润全</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">袁毅</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">何伟雪</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">蔡雪枝</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈晓彤</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">李艳婵</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">黄富荣</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">光明（1人）</div><div class="unsub-item"><span class="ui-name">胡德州</span><span class="ui-dept">保安</span></div><div class="unsub-group-label">光明儿保（2人）</div><div class="unsub-item"><span class="ui-name">黄亦璇</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">丁栩红</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">光明站（10人）</div><div class="unsub-item"><span class="ui-name">陈燕仪</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">袁月红</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">谢美兴</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">甘树兴</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">祁晓怡</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">欧阳湘瑛</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄嘉仪</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谢宝仪</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">刘秋波</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李美金</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">光明计免（5人）</div><div class="unsub-item"><span class="ui-name">戚淑敏</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黎锐坚</span><span class="ui-dept">行政后勤</span></div><div class="unsub-item"><span class="ui-name">韦小梅</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">蔡福珍</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">袁丽茵</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">公卫办（15人）</div><div class="unsub-item"><span class="ui-name">潘莹</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">曾志灵</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">吴蓉芝</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">卢柳荷</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">邓燕飞</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">刘雨荆</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">陈沛玲</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">钟志钦</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">何启安</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">王爽</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">卢海欣</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">邓子文</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">关碧榕</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">李洪花</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">罗敏仪</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">同沙科技园（8人）</div><div class="unsub-item"><span class="ui-name">吴俊</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟树明</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">卢艳芬</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">邱书燕</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">王晓丽</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谭秋鸿</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">黄方圆</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">何静娴</span><span class="ui-dept">护士</span></div><div class="unsub-group-label">同沙科技园站（1人）</div><div class="unsub-item"><span class="ui-name">袁衬兴</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">同沙站（6人）</div><div class="unsub-item"><span class="ui-name">张伟权</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">朱玫慧</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">江艳玲</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">缪沛钦</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">骆芳</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄鹤</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">周屋站（8人）</div><div class="unsub-item"><span class="ui-name">陈锦平</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">潘丽婷</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">邓清丽</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">周耀荣</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">张锦文</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">许利娣</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陈克勤</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">袁葵弟</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">堑头站（10人）</div><div class="unsub-item"><span class="ui-name">韩超虹</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">刘容彬</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">利燕泉</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">郑桂鑫</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">林爱萍</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">方慧卿</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陈婉娥</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">杨锦笑</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">林均玉</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">罗洁敏</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">工会（1人）</div><div class="unsub-item"><span class="ui-name">曾艺东</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">影像（4人）</div><div class="unsub-item"><span class="ui-name">严璐</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">何黄忠</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">严波</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">郑欢欢</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">总务办（1人）</div><div class="unsub-item"><span class="ui-name">周燮峰</span><span class="ui-dept">管理人员</span></div><div class="unsub-group-label">护理办（2人）</div><div class="unsub-item"><span class="ui-name">扈丹丹</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">卢肖君</span><span class="ui-dept">护士</span></div><div class="unsub-group-label">柏洲边儿保（1人）</div><div class="unsub-item"><span class="ui-name">陈雅婷</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">柏洲边站（8人）</div><div class="unsub-item"><span class="ui-name">李育谦</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">刘积苏</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">张玲玲</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">曾海仕</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黎文静</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">梁静</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">王群</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">刘银爱</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">柏洲边计免（3人）</div><div class="unsub-item"><span class="ui-name">韦苇</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈丽锦</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">王小丽</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">桑园站（16人）</div><div class="unsub-item"><span class="ui-name">黎奋强</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钱慧芬</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">谢青云</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">韦丽梅</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">程占锋</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">蒋红学</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟燕</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">袁锦超</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">吴丹丹</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄应辉</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">赖铭珍</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈永杰</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">方程</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">卢奕晨</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">胡慧红</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">黄伟珍</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">档案室（1人）</div><div class="unsub-item"><span class="ui-name">何美玲</span><span class="ui-dept">护士</span></div><div class="unsub-group-label">梨川站（7人）</div><div class="unsub-item"><span class="ui-name">黎志兴</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">梁桂仪</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">蔡建英</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">邹小丽</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">陈德娣</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">李珍花</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">刘琴琴</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">检验（6人）</div><div class="unsub-item"><span class="ui-name">李映雪</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">何运芝</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">江雨萍</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">钟碧梅</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">陈婉东</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">宁雅婷</span><span class="ui-dept">化验</span></div><div class="unsub-group-label">温塘站（17人）</div><div class="unsub-item"><span class="ui-name">成庆梅</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟雅雯</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">沈秋兰</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">戴紧跟</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">汪丽娟</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟玉英</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">植旭婷</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">钟宝莹</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">邓淑媛</span><span class="ui-dept">保洁</span></div><div class="unsub-item"><span class="ui-name">梁靖茹</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">曾伟琼</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">钟雪贞</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">蒙云霞</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谭桂燕</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄建华</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">王艳艳</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">李浩源</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">火炼树站（11人）</div><div class="unsub-item"><span class="ui-name">赖志英</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">廖琼花</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">彭暖林</span><span class="ui-dept">保安</span></div><div class="unsub-item"><span class="ui-name">邝常青</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">张伟华</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">梁方宜</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">朱妍桦</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄冬冬</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">廖佩炎</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">肖佩佩</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">桑玉香</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">牛山站（14人）</div><div class="unsub-item"><span class="ui-name">卢玉珍</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">黄慧娟</span><span class="ui-dept">化验</span></div><div class="unsub-item"><span class="ui-name">李伟芬</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">朱湘辉</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">何淑贞</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谭罗英</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">叶嘉伟</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">吴亮</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">罗娟</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">徐佳颖</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">莫健芳</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">陈静</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">庄远姬</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">吴兰英</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">疾控办（8人）</div><div class="unsub-item"><span class="ui-name">颜慧芬</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">李晓珊</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">李晓彤</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">李赋文</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">周浪燕</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">姚嘉明</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">钟淑珍</span><span class="ui-dept">公卫医师</span></div><div class="unsub-item"><span class="ui-name">叶晋升</span><span class="ui-dept">公卫医师</span></div><div class="unsub-group-label">石井（1人）</div><div class="unsub-item"><span class="ui-name">叶少微</span><span class="ui-dept">保洁</span></div><div class="unsub-group-label">石井站（9人）</div><div class="unsub-item"><span class="ui-name">关惠芬</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">何嘉玲</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">杨洁</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">徐静仪</span><span class="ui-dept">护士</span></div><div class="unsub-item"><span class="ui-name">谢凤娇</span><span class="ui-dept">药剂</span></div><div class="unsub-item"><span class="ui-name">刘顶球</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">陈仕连</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">姚冬琴</span><span class="ui-dept">医生</span></div><div class="unsub-item"><span class="ui-name">罗浩田</span><span class="ui-dept">医生</span></div><div class="unsub-group-label">财务室（2人）</div><div class="unsub-item"><span class="ui-name">袁小芳</span><span class="ui-dept">收费</span></div><div class="unsub-item"><span class="ui-name">袁淑贞</span><span class="ui-dept">管理人员</span></div></div>
 </div>
 
-<!-- ===== Roster Page ===== -->
+<!-- ===== My History Page ===== -->
 <div id="page-roster" class="page">
   <div class="roster-header">
-    <h1>花名册</h1>
-    <p>东城社区卫生服务中心在岗人员（含第三方）</p>
-    <div class="roster-search">
-      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" stroke="#fff" stroke-width="2" fill="none"></path></svg>
-      <input type="text" id="rosterSearch" placeholder="搜索姓名/部门/岗位">
-    </div>
+    <h1>我的填报记录</h1>
+    <p>输入您的姓名后，系统将自动显示您的填报记录</p>
   </div>
-  <div class="roster-list" id="rosterList">
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾艺东</div>
-        <div class="ri-info">工会 · 医生</div>
-      </div>
-      <div class="ri-phone">13620042288</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">胡海霞</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15817596432</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎奋强</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">13546980783</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">周洁珊</div>
-        <div class="ri-info">中心医务办 · 医生</div>
-      </div>
-      <div class="ri-phone">13794835927</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">严璐</div>
-        <div class="ri-info">影像 · 医生</div>
-      </div>
-      <div class="ri-phone">13528581477</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钱慧芬</div>
-        <div class="ri-info">桑园站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13713309028</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">萧秀兰</div>
-        <div class="ri-info">上桥站 · 护士</div>
-      </div>
-      <div class="ri-phone">15019999528</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓积银</div>
-        <div class="ri-info">中心护理办 · 护士</div>
-      </div>
-      <div class="ri-phone">13712551883</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄亦璇</div>
-        <div class="ri-info">光明儿保 · 医生</div>
-      </div>
-      <div class="ri-phone">13532301233</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">贾雪梅</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13431326439</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">母少刚</div>
-        <div class="ri-info">余屋站 · 医生</div>
-      </div>
-      <div class="ri-phone">18929165004</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李映雪</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">13215191299</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">关惠芬</div>
-        <div class="ri-info">石井站 · 护士</div>
-      </div>
-      <div class="ri-phone">13556661170</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢玉珍</div>
-        <div class="ri-info">牛山站 · 护士</div>
-      </div>
-      <div class="ri-phone">13686679550</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈燕仪</div>
-        <div class="ri-info">光明站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13798923818</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">翟伟明</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">15118382768</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄慧娟</div>
-        <div class="ri-info">牛山站 · 化验</div>
-      </div>
-      <div class="ri-phone">13622622610</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎志兴</div>
-        <div class="ri-info">梨川站 · 护士</div>
-      </div>
-      <div class="ri-phone">13713093026</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李晓燕</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13925578950</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁月红</div>
-        <div class="ri-info">光明站 · 医生</div>
-      </div>
-      <div class="ri-phone">15118299880</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李育谦</div>
-        <div class="ri-info">柏洲边站 · 医生</div>
-      </div>
-      <div class="ri-phone">13925506488</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何涛</div>
-        <div class="ri-info">中心医务办 · 医生</div>
-      </div>
-      <div class="ri-phone">15814274684</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢青云</div>
-        <div class="ri-info">桑园站 · 护士</div>
-      </div>
-      <div class="ri-phone">13437454491</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓贺春</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13922929489</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">韦丽梅</div>
-        <div class="ri-info">桑园站 · 化验</div>
-      </div>
-      <div class="ri-phone">13104795860</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">文华庭</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13537330416</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">程占锋</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">13763136678</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">欧阳雪琴</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15920611799</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓柱均</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13532366223</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张伟权</div>
-        <div class="ri-info">同沙站 · 医生</div>
-      </div>
-      <div class="ri-phone">13728168128</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何黄忠</div>
-        <div class="ri-info">影像 · 医生</div>
-      </div>
-      <div class="ri-phone">18025199018</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴俊</div>
-        <div class="ri-info">同沙科技园 · 医生</div>
-      </div>
-      <div class="ri-phone">13434053608</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">成庆梅</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">13412611829</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">颜慧芬</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15818226792</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">潘莹</div>
-        <div class="ri-info">医务办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15999760817</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李伟芬</div>
-        <div class="ri-info">牛山站 · 护士</div>
-      </div>
-      <div class="ri-phone">13560885885</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">赖志英</div>
-        <div class="ri-info">火炼树站 · 医生</div>
-      </div>
-      <div class="ri-phone">15920251840</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾志灵</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13794882085</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢桂香</div>
-        <div class="ri-info">中心计免 · 护士</div>
-      </div>
-      <div class="ri-phone">13712300447</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">韦苇</div>
-        <div class="ri-info">柏洲边计免 · 护士</div>
-      </div>
-      <div class="ri-phone">13642884402</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">戚淑敏</div>
-        <div class="ri-info">光明计免 · 护士</div>
-      </div>
-      <div class="ri-phone">13712291211</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎锐坚</div>
-        <div class="ri-info">光明计免 · 行政后勤</div>
-      </div>
-      <div class="ri-phone">13712922582</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李晓珊</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13450005565</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗燕笑</div>
-        <div class="ri-info">中心副主任 · 医生</div>
-      </div>
-      <div class="ri-phone">13711861812</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">秦柳平</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13622628789</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄浩昭</div>
-        <div class="ri-info">中心办公室 · 化验</div>
-      </div>
-      <div class="ri-phone">15017118586</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">付斯洁</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15989612901</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">扈丹丹</div>
-        <div class="ri-info">护理办 · 护士</div>
-      </div>
-      <div class="ri-phone">15918383689</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何运芝</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">13712101516</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢水良</div>
-        <div class="ri-info">上桥站 · 医生</div>
-      </div>
-      <div class="ri-phone">13686258373</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">颜显扬</div>
-        <div class="ri-info">余屋站 · 医生</div>
-      </div>
-      <div class="ri-phone">15322480891</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">严波</div>
-        <div class="ri-info">影像 · 医生</div>
-      </div>
-      <div class="ri-phone">13763164919</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">于长江</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15999754035</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李晓彤</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15521388819</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李赋文</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">18925753341</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴蓉芝</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13760904255</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">江雨萍</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">13790118209</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">霍杏芳</div>
-        <div class="ri-info">中心医务办 · 医生</div>
-      </div>
-      <div class="ri-phone">13528586083</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟雅雯</div>
-        <div class="ri-info">温塘站 · 护士</div>
-      </div>
-      <div class="ri-phone">13580736500</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">方兆</div>
-        <div class="ri-info">中心总务办 · 管理人员</div>
-      </div>
-      <div class="ri-phone">13829269516</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈锦平</div>
-        <div class="ri-info">周屋站 · 收费</div>
-      </div>
-      <div class="ri-phone">13580991929</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">余润全</div>
-        <div class="ri-info">余屋站 · 保安</div>
-      </div>
-      <div class="ri-phone">13532819003</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">潘丽婷</div>
-        <div class="ri-info">周屋站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13265222888</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陆琼梅</div>
-        <div class="ri-info">东泰站 · 护士</div>
-      </div>
-      <div class="ri-phone">13268633540</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">廖琼花</div>
-        <div class="ri-info">火炼树站 · 护士</div>
-      </div>
-      <div class="ri-phone">13712703682</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何美玲</div>
-        <div class="ri-info">档案室 · 护士</div>
-      </div>
-      <div class="ri-phone">18926839989</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">彭暖林</div>
-        <div class="ri-info">火炼树站 · 保安</div>
-      </div>
-      <div class="ri-phone">13532396793</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">唐明</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13622681080</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟碧梅</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">13711889139</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蒋红学</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">13662854262</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">朱玫慧</div>
-        <div class="ri-info">同沙站 · 医生</div>
-      </div>
-      <div class="ri-phone">13580853602</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢志伟</div>
-        <div class="ri-info">中心药剂办 · 药剂</div>
-      </div>
-      <div class="ri-phone">13424802078</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">朱湘辉</div>
-        <div class="ri-info">牛山站 · 医生</div>
-      </div>
-      <div class="ri-phone">13711979432</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">江艳玲</div>
-        <div class="ri-info">同沙站 · 护士</div>
-      </div>
-      <div class="ri-phone">13728113322</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何淑贞</div>
-        <div class="ri-info">牛山站 · 护士</div>
-      </div>
-      <div class="ri-phone">13688947402</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫凤青</div>
-        <div class="ri-info">中心药剂办 · 药剂</div>
-      </div>
-      <div class="ri-phone">13686149225</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">沈秋兰</div>
-        <div class="ri-info">温塘站 · 护士</div>
-      </div>
-      <div class="ri-phone">15999810179</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">魏燕萍</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13592766988</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓清丽</div>
-        <div class="ri-info">周屋站 · 护士</div>
-      </div>
-      <div class="ri-phone">13537161836</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">韩超虹</div>
-        <div class="ri-info">堑头站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13711925700</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘容彬</div>
-        <div class="ri-info">堑头站 · 保安</div>
-      </div>
-      <div class="ri-phone">13729971881</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟燕</div>
-        <div class="ri-info">桑园站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13925594186</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蓝艳梅</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13728184132</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁锦超</div>
-        <div class="ri-info">桑园站 · 收费</div>
-      </div>
-      <div class="ri-phone">13798895511</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">戴紧跟</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">13549470085</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">包伟党</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13650082169</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈秀霞</div>
-        <div class="ri-info">东泰站 · 护士</div>
-      </div>
-      <div class="ri-phone">18029029278</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">兰柳岸</div>
-        <div class="ri-info">中心医务办 · 护士</div>
-      </div>
-      <div class="ri-phone">13728213360</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">丁晓锋</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13580960118</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何嘉玲</div>
-        <div class="ri-info">石井站 · 收费</div>
-      </div>
-      <div class="ri-phone">15920613282</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钱树娟</div>
-        <div class="ri-info">东泰站 · 护士</div>
-      </div>
-      <div class="ri-phone">13528566990</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁换桂</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13580976579</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢淑娜</div>
-        <div class="ri-info">中心门诊 · 收费</div>
-      </div>
-      <div class="ri-phone">13713332468</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁映章</div>
-        <div class="ri-info">中心总务办 · 收费</div>
-      </div>
-      <div class="ri-phone">13412316603</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">利燕泉</div>
-        <div class="ri-info">堑头站 · 护士</div>
-      </div>
-      <div class="ri-phone">13711868386</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴丹丹</div>
-        <div class="ri-info">桑园站 · 护士</div>
-      </div>
-      <div class="ri-phone">13686297077</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">周耀荣</div>
-        <div class="ri-info">周屋站 · 保安</div>
-      </div>
-      <div class="ri-phone">13725738112</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶炯渠</div>
-        <div class="ri-info">中心后勤 · 司机</div>
-      </div>
-      <div class="ri-phone">13713088323</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁松发</div>
-        <div class="ri-info">中心后勤 · 司机</div>
-      </div>
-      <div class="ri-phone">13712708426</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">缪沛钦</div>
-        <div class="ri-info">同沙站 · 药剂</div>
-      </div>
-      <div class="ri-phone">15820986611</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁佩君</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13763230335</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟凤兰</div>
-        <div class="ri-info">中心总务办 · 护士</div>
-      </div>
-      <div class="ri-phone">13712466022</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁毅</div>
-        <div class="ri-info">余屋站 · 护士</div>
-      </div>
-      <div class="ri-phone">13686619056</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘红</div>
-        <div class="ri-info">中心医务办 · 护士</div>
-      </div>
-      <div class="ri-phone">18929206625</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">杨洁</div>
-        <div class="ri-info">石井站 · 护士</div>
-      </div>
-      <div class="ri-phone">13712352296</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟树明</div>
-        <div class="ri-info">同沙科技园 · 保安</div>
-      </div>
-      <div class="ri-phone">13559772933</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">彭丽荷</div>
-        <div class="ri-info">上桥站 · 保洁</div>
-      </div>
-      <div class="ri-phone">18948624386</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">翟海燕</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13642830330</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谭罗英</div>
-        <div class="ri-info">牛山站 · 医生</div>
-      </div>
-      <div class="ri-phone">13712618205</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邝常青</div>
-        <div class="ri-info">火炼树站 · 收费</div>
-      </div>
-      <div class="ri-phone">13612711922</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张伟华</div>
-        <div class="ri-info">火炼树站 · 医生</div>
-      </div>
-      <div class="ri-phone">13537371221</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">梁桂仪</div>
-        <div class="ri-info">梨川站 · 医生</div>
-      </div>
-      <div class="ri-phone">13763162707</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘积苏</div>
-        <div class="ri-info">柏洲边站 · 保安</div>
-      </div>
-      <div class="ri-phone">13688922291</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">汪丽娟</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">13717399321</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何伟雪</div>
-        <div class="ri-info">余屋站 · 医生</div>
-      </div>
-      <div class="ri-phone">13751208273</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">周浪燕</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13416689894</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蔡建英</div>
-        <div class="ri-info">梨川站 · 保洁</div>
-      </div>
-      <div class="ri-phone">13549363399</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邹小丽</div>
-        <div class="ri-info">梨川站 · 护士</div>
-      </div>
-      <div class="ri-phone">15989675110</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">香巧婵</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13729925509</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁刘锐</div>
-        <div class="ri-info">中心后勤 · 电工</div>
-      </div>
-      <div class="ri-phone">13669829022</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李华丽</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">13480035608</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟玉英</div>
-        <div class="ri-info">温塘站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13652500883</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈美蓉</div>
-        <div class="ri-info">中心药剂办 · 收费</div>
-      </div>
-      <div class="ri-phone">13423377894</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢艳芬</div>
-        <div class="ri-info">同沙科技园 · 医生</div>
-      </div>
-      <div class="ri-phone">13662877088</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张玲玲</div>
-        <div class="ri-info">柏洲边站 · 药剂</div>
-      </div>
-      <div class="ri-phone">15818262314</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴利娜</div>
-        <div class="ri-info">东泰站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13423003370</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶嘉伟</div>
-        <div class="ri-info">牛山站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13686695777</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邱书燕</div>
-        <div class="ri-info">同沙科技园 · 护士</div>
-      </div>
-      <div class="ri-phone">15118269792</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张伟乐</div>
-        <div class="ri-info">东泰站 · 护士</div>
-      </div>
-      <div class="ri-phone">18038238527</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾海仕</div>
-        <div class="ri-info">柏洲边站 · 医生</div>
-      </div>
-      <div class="ri-phone">13712286933</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫翠连</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13415963882</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蔡雪枝</div>
-        <div class="ri-info">余屋站 · 护士</div>
-      </div>
-      <div class="ri-phone">13712412461</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐静仪</div>
-        <div class="ri-info">石井站 · 护士</div>
-      </div>
-      <div class="ri-phone">18025290051</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">梁方宜</div>
-        <div class="ri-info">火炼树站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13713340282</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">郑桂鑫</div>
-        <div class="ri-info">堑头站 · 医生</div>
-      </div>
-      <div class="ri-phone">13538373959</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢皓</div>
-        <div class="ri-info">中心药剂办 · 药剂</div>
-      </div>
-      <div class="ri-phone">15999847846</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">朱妍桦</div>
-        <div class="ri-info">火炼树站 · 护士</div>
-      </div>
-      <div class="ri-phone">13713046986</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢柳荷</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13827208600</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">沈小城</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13925864669</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">欧彩莲</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13711905680</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">梁钻如</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13717162692</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">植旭婷</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">15920187692</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">林潇</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13392366727</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">成惠敏</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13650482662</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">唐显美</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">13662855890</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴锦霏</div>
-        <div class="ri-info">上桥站 · 药剂</div>
-      </div>
-      <div class="ri-phone">15818252261</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐秀环</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13902603210</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢美兴</div>
-        <div class="ri-info">光明站 · 护士</div>
-      </div>
-      <div class="ri-phone">13929422224</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎文静</div>
-        <div class="ri-info">柏洲边站 · 护士</div>
-      </div>
-      <div class="ri-phone">13580778462</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张锦文</div>
-        <div class="ri-info">周屋站 · 护士</div>
-      </div>
-      <div class="ri-phone">13412282163</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">许利娣</div>
-        <div class="ri-info">周屋站 · 医生</div>
-      </div>
-      <div class="ri-phone">15017043929</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈婉东</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">15217133599</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李俊霞</div>
-        <div class="ri-info">东泰站 · 化验</div>
-      </div>
-      <div class="ri-phone">15014973986</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢楚婷</div>
-        <div class="ri-info">东泰站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13560886683</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟宝莹</div>
-        <div class="ri-info">温塘站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13712497343</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蔡玉贤</div>
-        <div class="ri-info">东泰站 · 保安</div>
-      </div>
-      <div class="ri-phone">13712045604</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">茹少红</div>
-        <div class="ri-info">中心办公室 · 护士</div>
-      </div>
-      <div class="ri-phone">13416618212</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钱葵弟</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13549339638</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">巫凤玲</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15992936284</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁暖登</div>
-        <div class="ri-info">中心后勤 · 厨师</div>
-      </div>
-      <div class="ri-phone">13712610123</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟燕</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13712827209</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓淑媛</div>
-        <div class="ri-info">温塘站 · 保洁</div>
-      </div>
-      <div class="ri-phone">13532366880</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄应辉</div>
-        <div class="ri-info">桑园站 · 保安</div>
-      </div>
-      <div class="ri-phone">13809640778</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">方芹</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15813322679</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">甘树兴</div>
-        <div class="ri-info">光明站 · 医生</div>
-      </div>
-      <div class="ri-phone">18681144436</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">周桂芬</div>
-        <div class="ri-info">中心总务办 · 医生</div>
-      </div>
-      <div class="ri-phone">15818355272</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁韵珊</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13713342110</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">祁晓怡</div>
-        <div class="ri-info">光明站 · 医生</div>
-      </div>
-      <div class="ri-phone">18681198013</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">梁靖茹</div>
-        <div class="ri-info">温塘站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13925728471</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾伟琼</div>
-        <div class="ri-info">温塘站 · 化验</div>
-      </div>
-      <div class="ri-phone">15767970141</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎文君</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13549270740</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢凤娇</div>
-        <div class="ri-info">石井站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13631399741</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">冯婷</div>
-        <div class="ri-info">中心药剂办 · 药剂</div>
-      </div>
-      <div class="ri-phone">13686133062</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈克勤</div>
-        <div class="ri-info">周屋站 · 医生</div>
-      </div>
-      <div class="ri-phone">13902622684</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">柯银燕</div>
-        <div class="ri-info">上桥站 · 护士</div>
-      </div>
-      <div class="ri-phone">15816831662</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴凤珍</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">18316839886</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈晓彤</div>
-        <div class="ri-info">余屋站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13717389279</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘顶球</div>
-        <div class="ri-info">石井站 · 医生</div>
-      </div>
-      <div class="ri-phone">13631716213</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">梁静</div>
-        <div class="ri-info">柏洲边站 · 护士</div>
-      </div>
-      <div class="ri-phone">15899959499</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">欧阳湘瑛</div>
-        <div class="ri-info">光明站 · 护士</div>
-      </div>
-      <div class="ri-phone">13556618660</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘小凤</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13642875677</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘肖雯</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13332647707</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎淑君</div>
-        <div class="ri-info">东泰站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13450089345</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">骆芳</div>
-        <div class="ri-info">同沙站 · 护士</div>
-      </div>
-      <div class="ri-phone">15992840360</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">林爱萍</div>
-        <div class="ri-info">堑头站 · 护士</div>
-      </div>
-      <div class="ri-phone">13560895904</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄冬冬</div>
-        <div class="ri-info">火炼树站 · 护士</div>
-      </div>
-      <div class="ri-phone">13580793922</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄嘉仪</div>
-        <div class="ri-info">光明站 · 护士</div>
-      </div>
-      <div class="ri-phone">15019980933</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴亮</div>
-        <div class="ri-info">牛山站 · 医生</div>
-      </div>
-      <div class="ri-phone">13798725620</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">潘莉</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13712348060</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾佳美</div>
-        <div class="ri-info">东泰站 · 护士</div>
-      </div>
-      <div class="ri-phone">13711994552</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">赖铭珍</div>
-        <div class="ri-info">桑园站 · 护士</div>
-      </div>
-      <div class="ri-phone">15999905352</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">方慧卿</div>
-        <div class="ri-info">堑头站 · 医生</div>
-      </div>
-      <div class="ri-phone">15920230660</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">阙中桂</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15920583733</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">肖李梅</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15918655518</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫晓霞</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15913846927</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">姚嘉明</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">17722335032</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄媚</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15820838750</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟晓敏</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15920687123</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟雪贞</div>
-        <div class="ri-info">温塘站 · 护士</div>
-      </div>
-      <div class="ri-phone">13790155738</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钱梓瑜</div>
-        <div class="ri-info">上桥站 · 护士</div>
-      </div>
-      <div class="ri-phone">13790583677</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄衬兴</div>
-        <div class="ri-info">中心后勤 · 厨工</div>
-      </div>
-      <div class="ri-phone">13556629522</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李想</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13434510370</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗娟</div>
-        <div class="ri-info">牛山站 · 医生</div>
-      </div>
-      <div class="ri-phone">18664963278</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈怡</div>
-        <div class="ri-info">中心办公室 · 管理人员</div>
-      </div>
-      <div class="ri-phone">13929490237</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张莹</div>
-        <div class="ri-info">中心总务办 · 收费</div>
-      </div>
-      <div class="ri-phone">13717322082</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黎颖珊</div>
-        <div class="ri-info">中心门诊 · 收费</div>
-      </div>
-      <div class="ri-phone">13798806011</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钱婉玲</div>
-        <div class="ri-info">东泰站 · 收费</div>
-      </div>
-      <div class="ri-phone">13728329600</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李艳婵</div>
-        <div class="ri-info">余屋站 · 收费</div>
-      </div>
-      <div class="ri-phone">13713409620</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈仕连</div>
-        <div class="ri-info">石井站 · 医生</div>
-      </div>
-      <div class="ri-phone">13560174306</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟淑珍</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13723581432</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邱洪</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">18988562511</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶晋升</div>
-        <div class="ri-info">疾控办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15521119212</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢宝仪</div>
-        <div class="ri-info">光明站 · 收费</div>
-      </div>
-      <div class="ri-phone">15625508969</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢洁莹</div>
-        <div class="ri-info">中心门诊 · 收费</div>
-      </div>
-      <div class="ri-phone">13751305731</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢肖君</div>
-        <div class="ri-info">护理办 · 护士</div>
-      </div>
-      <div class="ri-phone">13622643242</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王群</div>
-        <div class="ri-info">柏洲边站 · 护士</div>
-      </div>
-      <div class="ri-phone">13135205059</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张洪艳</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">18718824981</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢丽姣</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15899934493</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">宁雅婷</div>
-        <div class="ri-info">检验 · 化验</div>
-      </div>
-      <div class="ri-phone">15096028087</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">庾钰青</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">15818228487</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王晓丽</div>
-        <div class="ri-info">同沙科技园 · 护士</div>
-      </div>
-      <div class="ri-phone">13537103271</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈德娣</div>
-        <div class="ri-info">梨川站 · 护士</div>
-      </div>
-      <div class="ri-phone">13650230443</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蔡慧娴</div>
-        <div class="ri-info">中心办公室 · 药剂</div>
-      </div>
-      <div class="ri-phone">13829226302</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谭秋鸿</div>
-        <div class="ri-info">同沙科技园 · 药剂</div>
-      </div>
-      <div class="ri-phone">13686167930</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟婷</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13923040015</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘倩</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15019256943</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">姚冬琴</div>
-        <div class="ri-info">石井站 · 医生</div>
-      </div>
-      <div class="ri-phone">18565865929</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁小芳</div>
-        <div class="ri-info">财务室 · 收费</div>
-      </div>
-      <div class="ri-phone">13592767021</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈婉娥</div>
-        <div class="ri-info">堑头站 · 收费</div>
-      </div>
-      <div class="ri-phone">13580731111</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓玉曼</div>
-        <div class="ri-info">上桥站 · 医生</div>
-      </div>
-      <div class="ri-phone">13728209266</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁伟文</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13026829985</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈梦</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">15015407790</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈永杰</div>
-        <div class="ri-info">桑园站 · 护士</div>
-      </div>
-      <div class="ri-phone">13652696240</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓燕飞</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">19907698102</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈晓园</div>
-        <div class="ri-info">中心办公室 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">17307696867</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘雨荆</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">19907699752</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈苏女</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13751466654</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢汉洪</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15899659465</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢佳茜</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">18807094979</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蒙云霞</div>
-        <div class="ri-info">温塘站 · 护士</div>
-      </div>
-      <div class="ri-phone">18702536258</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">喻小芳</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">18707951161</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶雅雯</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13732625891</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谭桂燕</div>
-        <div class="ri-info">温塘站 · 护士</div>
-      </div>
-      <div class="ri-phone">13712740007</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐佳颖</div>
-        <div class="ri-info">牛山站 · 药剂</div>
-      </div>
-      <div class="ri-phone">15079097701</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁淑英</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">15521146861</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李珍花</div>
-        <div class="ri-info">梨川站 · 药剂</div>
-      </div>
-      <div class="ri-phone">13544755295</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王杰</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13042268844</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">方程</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">13239913855</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄建华</div>
-        <div class="ri-info">温塘站 · 收费</div>
-      </div>
-      <div class="ri-phone">18028968688</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁海东</div>
-        <div class="ri-info">中心门诊 · 收费</div>
-      </div>
-      <div class="ri-phone">13412455778</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫健芳</div>
-        <div class="ri-info">牛山站 · 收费</div>
-      </div>
-      <div class="ri-phone">137988989966</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">贺露</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13712471987</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">江琴花</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13592846771</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟岑</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13640868317</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈静</div>
-        <div class="ri-info">牛山站 · 护士</div>
-      </div>
-      <div class="ri-phone">18938160106</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">温婉玲</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13538534484</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">杨锦笑</div>
-        <div class="ri-info">堑头站 · 护士</div>
-      </div>
-      <div class="ri-phone">13652646265</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王艳艳</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">13827263780</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">林均玉</div>
-        <div class="ri-info">堑头站 · 医生</div>
-      </div>
-      <div class="ri-phone">13751276367</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗光敏</div>
-        <div class="ri-info">上桥站 · 医生</div>
-      </div>
-      <div class="ri-phone">18819744286</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄方圆</div>
-        <div class="ri-info">同沙科技园 · 医生</div>
-      </div>
-      <div class="ri-phone">13650101222</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢奕晨</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">13723586449</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">胡慧红</div>
-        <div class="ri-info">桑园站 · 医生</div>
-      </div>
-      <div class="ri-phone">15818256164</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">林民庭</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">18316893308</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">庄远姬</div>
-        <div class="ri-info">牛山站 · 护士</div>
-      </div>
-      <div class="ri-phone">13790665079</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何静娴</div>
-        <div class="ri-info">同沙科技园 · 护士</div>
-      </div>
-      <div class="ri-phone">13713188330</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">纪晓丽</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15999791942</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁仲勋</div>
-        <div class="ri-info">中心主任 · 药剂</div>
-      </div>
-      <div class="ri-phone">13600292373</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄圣霖</div>
-        <div class="ri-info">中心门诊 · 收费</div>
-      </div>
-      <div class="ri-phone">15920634577</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘琴琴</div>
-        <div class="ri-info">梨川站 · 医生</div>
-      </div>
-      <div class="ri-phone">18778838835</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">朱惠瑜</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">18903037668</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">夏骥</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13712032794</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">胡跃琴</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">18840175939</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗浩田</div>
-        <div class="ri-info">石井站 · 医生</div>
-      </div>
-      <div class="ri-phone">15015263581</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李浩源</div>
-        <div class="ri-info">温塘站 · 医生</div>
-      </div>
-      <div class="ri-phone">15625059119</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">游子琳</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">17322100782</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">廖佩炎</div>
-        <div class="ri-info">火炼树站 · 医生</div>
-      </div>
-      <div class="ri-phone">13071336688</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">胡志强</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">18929106263</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">郑欢欢</div>
-        <div class="ri-info">影像 · 医生</div>
-      </div>
-      <div class="ri-phone">15016813136</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蒋艳平</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15274949210</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">余娟娟</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">19898000417</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">肖佩佩</div>
-        <div class="ri-info">火炼树站 · 医生</div>
-      </div>
-      <div class="ri-phone">13202960716</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈羽佳</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">17790941236</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">尹雪莹</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13712737205</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴丽慧</div>
-        <div class="ri-info">中心办公室 · 管理人员</div>
-      </div>
-      <div class="ri-phone">13592724720</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李嫣</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">18229635972</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王安怡</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13149331612</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗蕴灵</div>
-        <div class="ri-info">东泰站 · 医生</div>
-      </div>
-      <div class="ri-phone">18922980772</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫勇健</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13798919321</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄建</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13212624714</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李斌</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13580972706</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曹玲</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">15574990905</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢丽慧</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13660936259</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶振威</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">13929486923</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈彦</div>
-        <div class="ri-info">中心门诊 · 药剂</div>
-      </div>
-      <div class="ri-phone">17819843442</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曾素溶</div>
-        <div class="ri-info">中心门诊 · 护士</div>
-      </div>
-      <div class="ri-phone">13530971712</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈满成</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13592850620</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘秋波</div>
-        <div class="ri-info">光明站 · 医生</div>
-      </div>
-      <div class="ri-phone">19860019537</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">龙祖凡</div>
-        <div class="ri-info">中心门诊 · 医生</div>
-      </div>
-      <div class="ri-phone">13026705972</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘丽兰</div>
-        <div class="ri-info">中心门诊 · 康复</div>
-      </div>
-      <div class="ri-phone">18211543004</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">任华连</div>
-        <div class="ri-info">中心计免 · 护士</div>
-      </div>
-      <div class="ri-phone">18929427146</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">韦小梅</div>
-        <div class="ri-info">光明计免 · 护士</div>
-      </div>
-      <div class="ri-phone">13480476760</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">余润娇</div>
-        <div class="ri-info">中心计免 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13713140282</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢丽娟</div>
-        <div class="ri-info">中心儿保 · 护士</div>
-      </div>
-      <div class="ri-phone">13532970505</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈沛玲</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13532449500</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">丁栩红</div>
-        <div class="ri-info">光明儿保 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15818390553</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">钟志钦</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15920678261</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蔡福珍</div>
-        <div class="ri-info">光明计免 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13480461328</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">何启安</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15816832319</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈伟欢</div>
-        <div class="ri-info">中心计免 · 护士</div>
-      </div>
-      <div class="ri-phone">15999831062</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈丽锦</div>
-        <div class="ri-info">柏洲边计免 · 护士</div>
-      </div>
-      <div class="ri-phone">13790138900</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘丽国</div>
-        <div class="ri-info">中心儿保 · 护士</div>
-      </div>
-      <div class="ri-phone">13553808376</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄水娟</div>
-        <div class="ri-info">中心计免 · 护士</div>
-      </div>
-      <div class="ri-phone">18926833191</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">戴沛如</div>
-        <div class="ri-info">中心计免 · 护士</div>
-      </div>
-      <div class="ri-phone">15818328903</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王爽</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13532765609</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">尹伟茹</div>
-        <div class="ri-info">中心儿保 · 医生</div>
-      </div>
-      <div class="ri-phone">15107690902</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">王小丽</div>
-        <div class="ri-info">柏洲边计免 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15625590776</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">卢海欣</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13650289548</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">邓子文</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13267182286</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">关碧榕</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">18819749484</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">冯倩</div>
-        <div class="ri-info">中心计免 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15818480245</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李洪花</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13728374572</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张家华</div>
-        <div class="ri-info">中心儿保 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13392303433</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗敏仪</div>
-        <div class="ri-info">公卫办 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15016765564</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁丽茵</div>
-        <div class="ri-info">光明计免 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">15818227529</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐美玲</div>
-        <div class="ri-info">中心儿保 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">18826247310</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">陈雅婷</div>
-        <div class="ri-info">柏洲边儿保 · 公卫医师</div>
-      </div>
-      <div class="ri-phone">13532433098</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">倪琳</div>
-        <div class="ri-info">中心药剂办 · 药剂</div>
-      </div>
-      <div class="ri-phone">13538517761</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">周燮峰</div>
-        <div class="ri-info">总务办 · 管理人员</div>
-      </div>
-      <div class="ri-phone">13560886747</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁淑贞</div>
-        <div class="ri-info">财务室 · 管理人员</div>
-      </div>
-      <div class="ri-phone">13726431120</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">孙光绪</div>
-        <div class="ri-info">中心门诊 · 保安</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐晓林</div>
-        <div class="ri-info">中心门诊 · 保安</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李茂辉</div>
-        <div class="ri-info">中心门诊 · 保安</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">尹铁仔</div>
-        <div class="ri-info">中心门诊 · 保安</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">粟正义</div>
-        <div class="ri-info">中心门诊 · 中级保安岗位</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">严明</div>
-        <div class="ri-info">中心门诊 · 中级保安岗位</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">谢帆</div>
-        <div class="ri-info">中心门诊 · 中级保安岗位</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张涛</div>
-        <div class="ri-info">中心门诊 · 中级保安岗位</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">胡德州</div>
-        <div class="ri-info">光明 · 保安</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李翠兰</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">曹桂兰</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄凤章</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶福嫦</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">林琼兰</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘新凤</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄玉莲</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">张祝香</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">宋培艳</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">方培芝</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">杨旻</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">赖秀凝</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">蒋伟英</div>
-        <div class="ri-info">中心门诊 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘付铜英</div>
-        <div class="ri-info">中心门诊 · 中心厨房保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">莫明燕</div>
-        <div class="ri-info">下桥站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">吴兰英</div>
-        <div class="ri-info">牛山站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">徐伙连</div>
-        <div class="ri-info">东奉站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄富荣</div>
-        <div class="ri-info">余屋站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄鹤</div>
-        <div class="ri-info">同沙站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁衬兴</div>
-        <div class="ri-info">同沙科技园站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">李美金</div>
-        <div class="ri-info">光明站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">叶少微</div>
-        <div class="ri-info">石井 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">罗洁敏</div>
-        <div class="ri-info">堑头站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">桑玉香</div>
-        <div class="ri-info">火炼树站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">黄伟珍</div>
-        <div class="ri-info">桑园站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">袁葵弟</div>
-        <div class="ri-info">周屋站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
-    </div>
-  
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">刘银爱</div>
-        <div class="ri-info">柏洲边站 · 保洁</div>
-      </div>
-      <div class="ri-phone">—</div>
+  <div class="roster-search">
+    <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M11 18a7 7 0 100-14 7 7 0 000 14z" stroke="#fff" stroke-width="2" fill="none"></path></svg>
+    <input type="text" id="historySearch" placeholder="请输入您的姓名" maxlength="20">
+    <button id="historyBtn" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:14px;cursor:pointer;margin-left:8px;white-space:nowrap;">查询</button>
+  </div>
+  <div id="historyList" class="roster-list">
+    <div class="empty" style="padding:40px 20px;text-align:center;color:#888;">
+      <p>请输入您的姓名查看填报记录</p>
+      <p style="font-size:12px;margin-top:8px;color:#bbb;">仅可查看本人填报记录</p>
     </div>
   </div>
 </div>
@@ -3393,8 +462,8 @@ input:focus,select:focus,textarea:focus{outline:none}
     看板
   </button>
   <button data-page="roster" class="" id="tabRoster">
-    <svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-5 0-9 3-9 7v1h18v-1c0-4-4-7-9-7z"></path></svg>
-    花名册
+    <svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1s-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm-1 5h2v2h-2V8zm0 4h2v6h-2v-6z"></path></svg>
+    我的记录
   </button>
 </nav>
 
@@ -3414,7 +483,7 @@ input:focus,select:focus,textarea:focus{outline:none}
 <script>
 // ===== Roster Data =====
 const ROSTER = [
-{name:"曾艺东",dept:"工会",post:"医生",phone:"13620042288"},{name:"胡海霞",dept:"中心门诊",post:"医生",phone:"15817596432"},{name:"黎奋强",dept:"桑园站",post:"医生",phone:"13546980783"},{name:"周洁珊",dept:"中心医务办",post:"医生",phone:"13794835927"},{name:"严璐",dept:"影像",post:"医生",phone:"13528581477"},{name:"钱慧芬",dept:"桑园站",post:"药剂",phone:"13713309028"},{name:"萧秀兰",dept:"上桥站",post:"护士",phone:"15019999528"},{name:"邓积银",dept:"中心护理办",post:"护士",phone:"13712551883"},{name:"黄亦璇",dept:"光明儿保",post:"医生",phone:"13532301233"},{name:"贾雪梅",dept:"中心门诊",post:"医生",phone:"13431326439"},{name:"母少刚",dept:"余屋站",post:"医生",phone:"18929165004"},{name:"李映雪",dept:"检验",post:"化验",phone:"13215191299"},{name:"关惠芬",dept:"石井站",post:"护士",phone:"13556661170"},{name:"卢玉珍",dept:"牛山站",post:"护士",phone:"13686679550"},{name:"陈燕仪",dept:"光明站",post:"药剂",phone:"13798923818"},{name:"翟伟明",dept:"东泰站",post:"医生",phone:"15118382768"},{name:"黄慧娟",dept:"牛山站",post:"化验",phone:"13622622610"},{name:"黎志兴",dept:"梨川站",post:"护士",phone:"13713093026"},{name:"李晓燕",dept:"中心门诊",post:"护士",phone:"13925578950"},{name:"袁月红",dept:"光明站",post:"医生",phone:"15118299880"},{name:"李育谦",dept:"柏洲边站",post:"医生",phone:"13925506488"},{name:"何涛",dept:"中心医务办",post:"医生",phone:"15814274684"},{name:"谢青云",dept:"桑园站",post:"护士",phone:"13437454491"},{name:"邓贺春",dept:"中心门诊",post:"医生",phone:"13922929489"},{name:"韦丽梅",dept:"桑园站",post:"化验",phone:"13104795860"},{name:"文华庭",dept:"中心门诊",post:"医生",phone:"13537330416"},{name:"程占锋",dept:"桑园站",post:"医生",phone:"13763136678"},{name:"欧阳雪琴",dept:"中心门诊",post:"医生",phone:"15920611799"},{name:"邓柱均",dept:"中心门诊",post:"医生",phone:"13532366223"},{name:"张伟权",dept:"同沙站",post:"医生",phone:"13728168128"},{name:"何黄忠",dept:"影像",post:"医生",phone:"18025199018"},{name:"吴俊",dept:"同沙科技园",post:"医生",phone:"13434053608"},{name:"成庆梅",dept:"温塘站",post:"医生",phone:"13412611829"},{name:"颜慧芬",dept:"疾控办",post:"公卫医师",phone:"15818226792"},{name:"潘莹",dept:"公卫办",post:"公卫医师",phone:"15999760817"},{name:"李伟芬",dept:"牛山站",post:"护士",phone:"13560885885"},{name:"赖志英",dept:"火炼树站",post:"医生",phone:"15920251840"},{name:"曾志灵",dept:"公卫办",post:"公卫医师",phone:"13794882085"},{name:"谢桂香",dept:"中心计免",post:"护士",phone:"13712300447"},{name:"韦苇",dept:"柏洲边计免",post:"护士",phone:"13642884402"},{name:"戚淑敏",dept:"光明计免",post:"护士",phone:"13712291211"},{name:"黎锐坚",dept:"光明计免",post:"行政后勤",phone:"13712922582"},{name:"李晓珊",dept:"疾控办",post:"公卫医师",phone:"13450005565"},{name:"罗燕笑",dept:"中心副主任",post:"医生",phone:"13711861812"},{name:"秦柳平",dept:"中心门诊",post:"医生",phone:"13622628789"},{name:"黄浩昭",dept:"中心办公室",post:"化验",phone:"15017118586"},{name:"付斯洁",dept:"中心门诊",post:"医生",phone:"15989612901"},{name:"扈丹丹",dept:"护理办",post:"护士",phone:"15918383689"},{name:"何运芝",dept:"检验",post:"化验",phone:"13712101516"},{name:"谢水良",dept:"上桥站",post:"医生",phone:"13686258373"},{name:"颜显扬",dept:"余屋站",post:"医生",phone:"15322480891"},{name:"严波",dept:"影像",post:"医生",phone:"13763164919"},{name:"于长江",dept:"中心门诊",post:"医生",phone:"15999754035"},{name:"李晓彤",dept:"疾控办",post:"公卫医师",phone:"15521388819"},{name:"李赋文",dept:"疾控办",post:"公卫医师",phone:"18925753341"},{name:"吴蓉芝",dept:"公卫办",post:"公卫医师",phone:"13760904255"},{name:"江雨萍",dept:"检验",post:"化验",phone:"13790118209"},{name:"霍杏芳",dept:"中心医务办",post:"医生",phone:"13528586083"},{name:"钟雅雯",dept:"温塘站",post:"护士",phone:"13580736500"},{name:"方兆",dept:"中心总务办",post:"管理人员",phone:"13829269516"},{name:"陈锦平",dept:"周屋站",post:"收费",phone:"13580991929"},{name:"余润全",dept:"余屋站",post:"保安",phone:"13532819003"},{name:"潘丽婷",dept:"周屋站",post:"药剂",phone:"13265222888"},{name:"陆琼梅",dept:"东泰站",post:"护士",phone:"13268633540"},{name:"廖琼花",dept:"火炼树站",post:"护士",phone:"13712703682"},{name:"何美玲",dept:"档案室",post:"护士",phone:"18926839989"},{name:"彭暖林",dept:"火炼树站",post:"保安",phone:"13532396793"},{name:"唐明",dept:"中心门诊",post:"医生",phone:"13622681080"},{name:"钟碧梅",dept:"检验",post:"化验",phone:"13711889139"},{name:"蒋红学",dept:"桑园站",post:"医生",phone:"13662854262"},{name:"朱玫慧",dept:"同沙站",post:"医生",phone:"13580853602"},{name:"卢志伟",dept:"中心药剂办",post:"药剂",phone:"13424802078"},{name:"朱湘辉",dept:"牛山站",post:"医生",phone:"13711979432"},{name:"江艳玲",dept:"同沙站",post:"护士",phone:"13728113322"},{name:"何淑贞",dept:"牛山站",post:"护士",phone:"13688947402"},{name:"莫凤青",dept:"中心药剂办",post:"药剂",phone:"13686149225"},{name:"沈秋兰",dept:"温塘站",post:"护士",phone:"15999810179"},{name:"魏燕萍",dept:"中心门诊",post:"护士",phone:"13592766988"},{name:"邓清丽",dept:"周屋站",post:"护士",phone:"13537161836"},{name:"韩超虹",dept:"堑头站",post:"药剂",phone:"13711925700"},{name:"刘容彬",dept:"堑头站",post:"保安",phone:"13729971881"},{name:"钟燕",dept:"桑园站",post:"药剂",phone:"13925594186"},{name:"蓝艳梅",dept:"中心门诊",post:"护士",phone:"13728184132"},{name:"袁锦超",dept:"桑园站",post:"收费",phone:"13798895511"},{name:"戴紧跟",dept:"温塘站",post:"医生",phone:"13549470085"},{name:"包伟党",dept:"中心门诊",post:"医生",phone:"13650082169"},{name:"陈秀霞",dept:"东泰站",post:"护士",phone:"18029029278"},{name:"兰柳岸",dept:"中心医务办",post:"护士",phone:"13728213360"},{name:"丁晓锋",dept:"中心门诊",post:"药剂",phone:"13580960118"},{name:"何嘉玲",dept:"石井站",post:"收费",phone:"15920613282"},{name:"钱树娟",dept:"东泰站",post:"护士",phone:"13528566990"},{name:"袁换桂",dept:"中心门诊",post:"护士",phone:"13580976579"},{name:"卢淑娜",dept:"中心门诊",post:"收费",phone:"13713332468"},{name:"袁映章",dept:"中心总务办",post:"收费",phone:"13412316603"},{name:"利燕泉",dept:"堑头站",post:"护士",phone:"13711868386"},{name:"吴丹丹",dept:"桑园站",post:"护士",phone:"13686297077"},{name:"周耀荣",dept:"周屋站",post:"保安",phone:"13725738112"},{name:"叶炯渠",dept:"中心后勤",post:"司机",phone:"13713088323"},{name:"袁松发",dept:"中心后勤",post:"司机",phone:"13712708426"},{name:"缪沛钦",dept:"同沙站",post:"药剂",phone:"15820986611"},{name:"袁佩君",dept:"中心门诊",post:"药剂",phone:"13763230335"},{name:"钟凤兰",dept:"中心总务办",post:"护士",phone:"13712466022"},{name:"袁毅",dept:"余屋站",post:"护士",phone:"13686619056"},{name:"刘红",dept:"中心医务办",post:"护士",phone:"18929206625"},{name:"杨洁",dept:"石井站",post:"护士",phone:"13712352296"},{name:"钟树明",dept:"同沙科技园",post:"保安",phone:"13559772933"},{name:"彭丽荷",dept:"上桥站",post:"保洁",phone:"18948624386"},{name:"翟海燕",dept:"中心门诊",post:"医生",phone:"13642830330"},{name:"谭罗英",dept:"牛山站",post:"医生",phone:"13712618205"},{name:"邝常青",dept:"火炼树站",post:"收费",phone:"13612711922"},{name:"张伟华",dept:"火炼树站",post:"医生",phone:"13537371221"},{name:"梁桂仪",dept:"梨川站",post:"医生",phone:"13763162707"},{name:"刘积苏",dept:"柏洲边站",post:"保安",phone:"13688922291"},{name:"汪丽娟",dept:"温塘站",post:"医生",phone:"13717399321"},{name:"何伟雪",dept:"余屋站",post:"医生",phone:"13751208273"},{name:"周浪燕",dept:"疾控办",post:"公卫医师",phone:"13416689894"},{name:"蔡建英",dept:"梨川站",post:"保洁",phone:"13549363399"},{name:"邹小丽",dept:"梨川站",post:"护士",phone:"15989675110"},{name:"香巧婵",dept:"中心门诊",post:"护士",phone:"13729925509"},{name:"袁刘锐",dept:"中心后勤",post:"电工",phone:"13669829022"},{name:"李华丽",dept:"东泰站",post:"医生",phone:"13480035608"},{name:"钟玉英",dept:"温塘站",post:"药剂",phone:"13652500883"},{name:"陈美蓉",dept:"中心药剂办",post:"收费",phone:"13423377894"},{name:"卢艳芬",dept:"同沙科技园",post:"医生",phone:"13662877088"},{name:"张玲玲",dept:"柏洲边站",post:"药剂",phone:"15818262314"},{name:"吴利娜",dept:"东泰站",post:"药剂",phone:"13423003370"},{name:"叶嘉伟",dept:"牛山站",post:"药剂",phone:"13686695777"},{name:"邱书燕",dept:"同沙科技园",post:"护士",phone:"15118269792"},{name:"张伟乐",dept:"东泰站",post:"护士",phone:"18038238527"},{name:"曾海仕",dept:"柏洲边站",post:"医生",phone:"13712286933"},{name:"莫翠连",dept:"中心门诊",post:"药剂",phone:"13415963882"},{name:"蔡雪枝",dept:"余屋站",post:"护士",phone:"13712412461"},{name:"徐静仪",dept:"石井站",post:"护士",phone:"18025290051"},{name:"梁方宜",dept:"火炼树站",post:"药剂",phone:"13713340282"},{name:"郑桂鑫",dept:"堑头站",post:"医生",phone:"13538373959"},{name:"谢皓",dept:"中心药剂办",post:"药剂",phone:"15999847846"},{name:"朱妍桦",dept:"火炼树站",post:"护士",phone:"13713046986"},{name:"卢柳荷",dept:"公卫办",post:"公卫医师",phone:"13827208600"},{name:"沈小城",dept:"中心门诊",post:"护士",phone:"13925864669"},{name:"欧彩莲",dept:"中心门诊",post:"药剂",phone:"13711905680"},{name:"梁钻如",dept:"中心门诊",post:"药剂",phone:"13717162692"},{name:"植旭婷",dept:"温塘站",post:"医生",phone:"15920187692"},{name:"林潇",dept:"中心门诊",post:"医生",phone:"13392366727"},{name:"成惠敏",dept:"中心门诊",post:"护士",phone:"13650482662"},{name:"唐显美",dept:"东泰站",post:"医生",phone:"13662855890"},{name:"吴锦霏",dept:"上桥站",post:"药剂",phone:"15818252261"},{name:"徐秀环",dept:"中心医务办",post:"护士",phone:"13902603210"},{name:"谢美兴",dept:"光明站",post:"护士",phone:"13929422224"},{name:"黎文静",dept:"柏洲边站",post:"护士",phone:"13580778462"},{name:"张锦文",dept:"周屋站",post:"护士",phone:"13412282163"},{name:"许利娣",dept:"周屋站",post:"医生",phone:"15017043929"},{name:"陈婉东",dept:"检验",post:"化验",phone:"15217133599"},{name:"李俊霞",dept:"东泰站",post:"化验",phone:"15014973986"},{name:"卢楚婷",dept:"东泰站",post:"药剂",phone:"13560886683"},{name:"钟宝莹",dept:"温塘站",post:"药剂",phone:"13712497343"},{name:"蔡玉贤",dept:"东泰站",post:"保安",phone:"13712045604"},{name:"茹少红",dept:"中心办公室",post:"护士",phone:"13416618212"},{name:"钱葵弟",dept:"中心门诊",post:"护士",phone:"13549339638"},{name:"巫凤玲",dept:"中心门诊",post:"护士",phone:"15992936284"},{name:"袁暖登",dept:"中心后勤",post:"厨师",phone:"13712610123"},{name:"钟燕",dept:"中心门诊",post:"护士",phone:"13712827209"},{name:"邓淑媛",dept:"温塘站",post:"保洁",phone:"13532366880"},{name:"黄应辉",dept:"桑园站",post:"保安",phone:"13809640778"},{name:"方芹",dept:"中心门诊",post:"护士",phone:"15813322679"},{name:"甘树兴",dept:"光明站",post:"医生",phone:"18681144436"},{name:"周桂芬",dept:"中心总务办",post:"医生",phone:"15818355272"},{name:"袁韵珊",dept:"中心门诊",post:"医生",phone:"13713342110"},{name:"祁晓怡",dept:"光明站",post:"医生",phone:"18681198013"},{name:"梁靖茹",dept:"温塘站",post:"药剂",phone:"13925728471"},{name:"曾伟琼",dept:"温塘站",post:"化验",phone:"15767970141"},{name:"黎文君",dept:"中心门诊",post:"护士",phone:"13549270740"},{name:"谢凤娇",dept:"石井站",post:"药剂",phone:"13631399741"},{name:"冯婷",dept:"中心药剂办",post:"药剂",phone:"13686133062"},{name:"陈克勤",dept:"周屋站",post:"医生",phone:"13902622684"},{name:"柯银燕",dept:"上桥站",post:"护士",phone:"15816831662"},{name:"吴凤珍",dept:"东泰站",post:"医生",phone:"18316839886"},{name:"陈晓彤",dept:"余屋站",post:"药剂",phone:"13717389279"},{name:"刘顶球",dept:"石井站",post:"医生",phone:"13631716213"},{name:"梁静",dept:"柏洲边站",post:"护士",phone:"15899959499"},{name:"欧阳湘瑛",dept:"光明站",post:"护士",phone:"13556618660"},{name:"刘小凤",dept:"中心门诊",post:"药剂",phone:"13642875677"},{name:"刘肖雯",dept:"中心门诊",post:"护士",phone:"13332647707"},{name:"黎淑君",dept:"东泰站",post:"药剂",phone:"13450089345"},{name:"骆芳",dept:"同沙站",post:"护士",phone:"15992840360"},{name:"林爱萍",dept:"堑头站",post:"护士",phone:"13560895904"},{name:"黄冬冬",dept:"火炼树站",post:"护士",phone:"13580793922"},{name:"黄嘉仪",dept:"光明站",post:"护士",phone:"15019980933"},{name:"吴亮",dept:"牛山站",post:"医生",phone:"13798725620"},{name:"潘莉",dept:"中心门诊",post:"药剂",phone:"13712348060"},{name:"曾佳美",dept:"东泰站",post:"护士",phone:"13711994552"},{name:"赖铭珍",dept:"桑园站",post:"护士",phone:"15999905352"},{name:"方慧卿",dept:"堑头站",post:"医生",phone:"15920230660"},{name:"阙中桂",dept:"中心门诊",post:"医生",phone:"15920583733"},{name:"肖李梅",dept:"中心门诊",post:"医生",phone:"15918655518"},{name:"莫晓霞",dept:"中心门诊",post:"护士",phone:"15913846927"},{name:"姚嘉明",dept:"疾控办",post:"公卫医师",phone:"17722335032"},{name:"黄媚",dept:"中心门诊",post:"护士",phone:"15820838750"},{name:"钟晓敏",dept:"中心门诊",post:"护士",phone:"15920687123"},{name:"钟雪贞",dept:"温塘站",post:"护士",phone:"13790155738"},{name:"钱梓瑜",dept:"上桥站",post:"护士",phone:"13790583677"},{name:"黄衬兴",dept:"中心后勤",post:"厨工",phone:"13556629522"},{name:"李想",dept:"中心门诊",post:"医生",phone:"13434510370"},{name:"罗娟",dept:"牛山站",post:"医生",phone:"18664963278"},{name:"陈怡",dept:"中心办公室",post:"管理人员",phone:"13929490237"},{name:"张莹",dept:"中心总务办",post:"收费",phone:"13717322082"},{name:"黎颖珊",dept:"中心门诊",post:"收费",phone:"13798806011"},{name:"钱婉玲",dept:"东泰站",post:"收费",phone:"13728329600"},{name:"李艳婵",dept:"余屋站",post:"收费",phone:"13713409620"},{name:"陈仕连",dept:"石井站",post:"医生",phone:"13560174306"},{name:"钟淑珍",dept:"疾控办",post:"公卫医师",phone:"13723581432"},{name:"邱洪",dept:"中心门诊",post:"医生",phone:"18988562511"},{name:"叶晋升",dept:"疾控办",post:"公卫医师",phone:"15521119212"},{name:"谢宝仪",dept:"光明站",post:"收费",phone:"15625508969"},{name:"卢洁莹",dept:"中心门诊",post:"收费",phone:"13751305731"},{name:"卢肖君",dept:"护理办",post:"护士",phone:"13622643242"},{name:"王群",dept:"柏洲边站",post:"护士",phone:"13135205059"},{name:"张洪艳",dept:"中心门诊",post:"护士",phone:"18718824981"},{name:"谢丽姣",dept:"中心门诊",post:"护士",phone:"15899934493"},{name:"宁雅婷",dept:"检验",post:"化验",phone:"15096028087"},{name:"庾钰青",dept:"中心门诊",post:"药剂",phone:"15818228487"},{name:"王晓丽",dept:"同沙科技园",post:"护士",phone:"13537103271"},{name:"陈德娣",dept:"梨川站",post:"护士",phone:"13650230443"},{name:"蔡慧娴",dept:"中心办公室",post:"药剂",phone:"13829226302"},{name:"谭秋鸿",dept:"同沙科技园",post:"药剂",phone:"13686167930"},{name:"钟婷",dept:"中心门诊",post:"护士",phone:"13923040015"},{name:"刘倩",dept:"中心门诊",post:"护士",phone:"15019256943"},{name:"姚冬琴",dept:"石井站",post:"医生",phone:"18565865929"},{name:"袁小芳",dept:"财务室",post:"收费",phone:"13592767021"},{name:"陈婉娥",dept:"堑头站",post:"收费",phone:"13580731111"},{name:"邓玉曼",dept:"上桥站",post:"医生",phone:"13728209266"},{name:"袁伟文",dept:"中心门诊",post:"医生",phone:"13026829985"},{name:"陈梦",dept:"中心门诊",post:"护士",phone:"15015407790"},{name:"陈永杰",dept:"桑园站",post:"护士",phone:"13652696240"},{name:"邓燕飞",dept:"中心医务办",post:"公卫医师",phone:"19907698102"},{name:"陈晓园",dept:"中心办公室",post:"公卫医师",phone:"17307696867"},{name:"刘雨荆",dept:"公卫办",post:"公卫医师",phone:"19907699752"},{name:"陈苏女",dept:"中心门诊",post:"医生",phone:"13751466654"},{name:"谢汉洪",dept:"中心门诊",post:"医生",phone:"15899659465"},{name:"卢佳茜",dept:"中心门诊",post:"护士",phone:"18807094979"},{name:"蒙云霞",dept:"温塘站",post:"护士",phone:"18702536258"},{name:"喻小芳",dept:"中心门诊",post:"护士",phone:"18707951161"},{name:"叶雅雯",dept:"中心门诊",post:"药剂",phone:"13732625891"},{name:"谭桂燕",dept:"温塘站",post:"护士",phone:"13712740007"},{name:"徐佳颖",dept:"牛山站",post:"药剂",phone:"15079097701"},{name:"袁淑英",dept:"中心门诊",post:"药剂",phone:"15521146861"},{name:"李珍花",dept:"梨川站",post:"药剂",phone:"13544755295"},{name:"王杰",dept:"中心门诊",post:"医生",phone:"13042268844"},{name:"方程",dept:"桑园站",post:"医生",phone:"13239913855"},{name:"黄建华",dept:"温塘站",post:"收费",phone:"18028968688"},{name:"袁海东",dept:"中心门诊",post:"收费",phone:"13412455778"},{name:"莫健芳",dept:"牛山站",post:"收费",phone:"137988989966"},{name:"贺露",dept:"中心门诊",post:"护士",phone:"13712471987"},{name:"江琴花",dept:"中心门诊",post:"医生",phone:"13592846771"},{name:"钟岑",dept:"中心门诊",post:"药剂",phone:"13640868317"},{name:"陈静",dept:"牛山站",post:"护士",phone:"18938160106"},{name:"温婉玲",dept:"中心门诊",post:"护士",phone:"13538534484"},{name:"杨锦笑",dept:"堑头站",post:"护士",phone:"13652646265"},{name:"王艳艳",dept:"温塘站",post:"医生",phone:"13827263780"},{name:"林均玉",dept:"堑头站",post:"医生",phone:"13751276367"},{name:"罗光敏",dept:"上桥站",post:"医生",phone:"18819744286"},{name:"黄方圆",dept:"同沙科技园",post:"医生",phone:"13650101222"},{name:"卢奕晨",dept:"桑园站",post:"医生",phone:"13723586449"},{name:"胡慧红",dept:"桑园站",post:"医生",phone:"15818256164"},{name:"林民庭",dept:"东泰站",post:"医生",phone:"18316893308"},{name:"庄远姬",dept:"牛山站",post:"护士",phone:"13790665079"},{name:"何静娴",dept:"同沙科技园",post:"护士",phone:"13713188330"},{name:"纪晓丽",dept:"中心门诊",post:"医生",phone:"15999791942"},{name:"袁仲勋",dept:"中心主任",post:"药剂",phone:"13600292373"},{name:"黄圣霖",dept:"中心门诊",post:"收费",phone:"15920634577"},{name:"刘琴琴",dept:"梨川站",post:"医生",phone:"18778838835"},{name:"朱惠瑜",dept:"中心门诊",post:"医生",phone:"18903037668"},{name:"夏骥",dept:"中心门诊",post:"医生",phone:"13712032794"},{name:"胡跃琴",dept:"中心门诊",post:"医生",phone:"18840175939"},{name:"罗浩田",dept:"石井站",post:"医生",phone:"15015263581"},{name:"李浩源",dept:"温塘站",post:"医生",phone:"15625059119"},{name:"游子琳",dept:"中心门诊",post:"医生",phone:"17322100782"},{name:"廖佩炎",dept:"火炼树站",post:"医生",phone:"13071336688"},{name:"胡志强",dept:"中心门诊",post:"医生",phone:"18929106263"},{name:"郑欢欢",dept:"影像",post:"医生",phone:"15016813136"},{name:"蒋艳平",dept:"中心门诊",post:"医生",phone:"15274949210"},{name:"余娟娟",dept:"中心门诊",post:"医生",phone:"19898000417"},{name:"肖佩佩",dept:"火炼树站",post:"医生",phone:"13202960716"},{name:"陈羽佳",dept:"中心门诊",post:"医生",phone:"17790941236"},{name:"尹雪莹",dept:"中心门诊",post:"医生",phone:"13712737205"},{name:"吴丽慧",dept:"中心办公室",post:"管理人员",phone:"13592724720"},{name:"李嫣",dept:"中心门诊",post:"医生",phone:"18229635972"},{name:"王安怡",dept:"中心门诊",post:"医生",phone:"13149331612"},{name:"罗蕴灵",dept:"东泰站",post:"医生",phone:"18922980772"},{name:"莫勇健",dept:"中心门诊",post:"医生",phone:"13798919321"},{name:"黄建",dept:"中心门诊",post:"医生",phone:"13212624714"},{name:"李斌",dept:"中心门诊",post:"医生",phone:"13580972706"},{name:"曹玲",dept:"中心门诊",post:"医生",phone:"15574990905"},{name:"卢丽慧",dept:"中心门诊",post:"护士",phone:"13660936259"},{name:"叶振威",dept:"中心门诊",post:"药剂",phone:"13929486923"},{name:"陈彦",dept:"中心门诊",post:"药剂",phone:"17819843442"},{name:"曾素溶",dept:"中心门诊",post:"护士",phone:"13530971712"},{name:"陈满成",dept:"中心门诊",post:"医生",phone:"13592850620"},{name:"刘秋波",dept:"光明站",post:"医生",phone:"19860019537"},{name:"龙祖凡",dept:"中心门诊",post:"医生",phone:"13026705972"},{name:"刘丽兰",dept:"中心门诊",post:"康复",phone:"18211543004"},{name:"任华连",dept:"中心计免",post:"护士",phone:"18929427146"},{name:"韦小梅",dept:"光明计免",post:"护士",phone:"13480476760"},{name:"余润娇",dept:"中心计免",post:"公卫医师",phone:"13713140282"},{name:"谢丽娟",dept:"中心儿保",post:"护士",phone:"13532970505"},{name:"陈沛玲",dept:"公卫办",post:"公卫医师",phone:"13532449500"},{name:"丁栩红",dept:"光明儿保",post:"公卫医师",phone:"15818390553"},{name:"钟志钦",dept:"公卫办",post:"公卫医师",phone:"15920678261"},{name:"蔡福珍",dept:"光明计免",post:"公卫医师",phone:"13480461328"},{name:"何启安",dept:"公卫办",post:"公卫医师",phone:"15816832319"},{name:"陈伟欢",dept:"中心计免",post:"护士",phone:"15999831062"},{name:"陈丽锦",dept:"柏洲边计免",post:"护士",phone:"13790138900"},{name:"刘丽国",dept:"中心儿保",post:"护士",phone:"13553808376"},{name:"黄水娟",dept:"中心计免",post:"护士",phone:"18926833191"},{name:"戴沛如",dept:"中心计免",post:"护士",phone:"15818328903"},{name:"王爽",dept:"公卫办",post:"公卫医师",phone:"13532765609"},{name:"尹伟茹",dept:"中心儿保",post:"医生",phone:"15107690902"},{name:"王小丽",dept:"柏洲边计免",post:"公卫医师",phone:"15625590776"},{name:"卢海欣",dept:"公卫办",post:"公卫医师",phone:"13650289548"},{name:"邓子文",dept:"公卫办",post:"公卫医师",phone:"13267182286"},{name:"关碧榕",dept:"公卫办",post:"公卫医师",phone:"18819749484"},{name:"冯倩",dept:"中心计免",post:"公卫医师",phone:"15818480245"},{name:"李洪花",dept:"公卫办",post:"公卫医师",phone:"13728374572"},{name:"张家华",dept:"中心儿保",post:"公卫医师",phone:"13392303433"},{name:"罗敏仪",dept:"公卫办",post:"公卫医师",phone:"15016765564"},{name:"袁丽茵",dept:"光明计免",post:"公卫医师",phone:"15818227529"},{name:"徐美玲",dept:"中心儿保",post:"公卫医师",phone:"18826247310"},{name:"陈雅婷",dept:"柏洲边儿保",post:"公卫医师",phone:"13532433098"},{name:"倪琳",dept:"中心药剂办",post:"药剂",phone:"13538517761"},{name:"周燮峰",dept:"总务办",post:"管理人员",phone:"13560886747"},{name:"袁淑贞",dept:"财务室",post:"管理人员",phone:"13726431120"},{name:"孙光绪",dept:"中心门诊",post:"保安",phone:""},{name:"徐晓林",dept:"中心门诊",post:"保安",phone:""},{name:"李茂辉",dept:"中心门诊",post:"保安",phone:""},{name:"尹铁仔",dept:"中心门诊",post:"保安",phone:""},{name:"粟正义",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"严明",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"谢帆",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"张涛",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"胡德州",dept:"光明",post:"保安",phone:""},{name:"李翠兰",dept:"中心门诊",post:"保洁",phone:""},{name:"曹桂兰",dept:"中心门诊",post:"保洁",phone:""},{name:"黄凤章",dept:"中心门诊",post:"保洁",phone:""},{name:"叶福嫦",dept:"中心门诊",post:"保洁",phone:""},{name:"林琼兰",dept:"中心门诊",post:"保洁",phone:""},{name:"刘新凤",dept:"中心门诊",post:"保洁",phone:""},{name:"黄玉莲",dept:"中心门诊",post:"保洁",phone:""},{name:"张祝香",dept:"中心门诊",post:"保洁",phone:""},{name:"宋培艳",dept:"中心门诊",post:"保洁",phone:""},{name:"方培芝",dept:"中心门诊",post:"保洁",phone:""},{name:"杨旻",dept:"中心门诊",post:"保洁",phone:""},{name:"赖秀凝",dept:"中心门诊",post:"保洁",phone:""},{name:"蒋伟英",dept:"中心门诊",post:"保洁",phone:""},{name:"刘付铜英",dept:"中心门诊",post:"中心厨房保洁",phone:""},{name:"莫明燕",dept:"下桥站",post:"保洁",phone:""},{name:"吴兰英",dept:"牛山站",post:"保洁",phone:""},{name:"徐伙连",dept:"东奉站",post:"保洁",phone:""},{name:"黄富荣",dept:"余屋站",post:"保洁",phone:""},{name:"黄鹤",dept:"同沙站",post:"保洁",phone:""},{name:"袁衬兴",dept:"同沙科技园站",post:"保洁",phone:""},{name:"李美金",dept:"光明站",post:"保洁",phone:""},{name:"叶少微",dept:"石井",post:"保洁",phone:""},{name:"罗洁敏",dept:"堑头站",post:"保洁",phone:""},{name:"桑玉香",dept:"火炼树站",post:"保洁",phone:""},{name:"黄伟珍",dept:"桑园站",post:"保洁",phone:""},{name:"袁葵弟",dept:"周屋站",post:"保洁",phone:""},{name:"刘银爱",dept:"柏洲边站",post:"保洁",phone:""}
+{name:"曾艺东",dept:"工会",post:"医生",phone:"13620042288"},{name:"胡海霞",dept:"中心门诊",post:"医生",phone:"15817596432"},{name:"黎奋强",dept:"桑园站",post:"医生",phone:"13546980783"},{name:"周洁珊",dept:"中心医务办",post:"医生",phone:"13794835927"},{name:"严璐",dept:"影像",post:"医生",phone:"13528581477"},{name:"钱慧芬",dept:"桑园站",post:"药剂",phone:"13713309028"},{name:"萧秀兰",dept:"上桥站",post:"护士",phone:"15019999528"},{name:"邓积银",dept:"中心护理办",post:"护士",phone:"13712551883"},{name:"黄亦璇",dept:"光明儿保",post:"医生",phone:"13532301233"},{name:"贾雪梅",dept:"中心门诊",post:"医生",phone:"13431326439"},{name:"母少刚",dept:"余屋站",post:"医生",phone:"18929165004"},{name:"李映雪",dept:"检验",post:"化验",phone:"13215191299"},{name:"关惠芬",dept:"石井站",post:"护士",phone:"13556661170"},{name:"卢玉珍",dept:"牛山站",post:"护士",phone:"13686679550"},{name:"陈燕仪",dept:"光明站",post:"药剂",phone:"13798923818"},{name:"翟伟明",dept:"东泰站",post:"医生",phone:"15118382768"},{name:"黄慧娟",dept:"牛山站",post:"化验",phone:"13622622610"},{name:"黎志兴",dept:"梨川站",post:"护士",phone:"13713093026"},{name:"李晓燕",dept:"中心门诊",post:"护士",phone:"13925578950"},{name:"袁月红",dept:"光明站",post:"医生",phone:"15118299880"},{name:"李育谦",dept:"柏洲边站",post:"医生",phone:"13925506488"},{name:"何涛",dept:"中心医务办",post:"医生",phone:"15814274684"},{name:"谢青云",dept:"桑园站",post:"护士",phone:"13437454491"},{name:"邓贺春",dept:"中心门诊",post:"医生",phone:"13922929489"},{name:"韦丽梅",dept:"桑园站",post:"化验",phone:"13104795860"},{name:"文华庭",dept:"中心门诊",post:"医生",phone:"13537330416"},{name:"程占锋",dept:"桑园站",post:"医生",phone:"13763136678"},{name:"欧阳雪琴",dept:"中心门诊",post:"医生",phone:"15920611799"},{name:"邓柱均",dept:"中心门诊",post:"医生",phone:"13532366223"},{name:"张伟权",dept:"同沙站",post:"医生",phone:"13728168128"},{name:"何黄忠",dept:"影像",post:"医生",phone:"18025199018"},{name:"吴俊",dept:"同沙科技园",post:"医生",phone:"13434053608"},{name:"成庆梅",dept:"温塘站",post:"医生",phone:"13412611829"},{name:"颜慧芬",dept:"疾控办",post:"公卫医师",phone:"15818226792"},{name:"潘莹",dept:"公卫办",post:"公卫医师",phone:"15999760817"},{name:"李伟芬",dept:"牛山站",post:"护士",phone:"13560885885"},{name:"赖志英",dept:"火炼树站",post:"医生",phone:"15920251840"},{name:"曾志灵",dept:"公卫办",post:"公卫医师",phone:"13794882085"},{name:"谢桂香",dept:"中心计免",post:"护士",phone:"13712300447"},{name:"韦苇",dept:"柏洲边计免",post:"护士",phone:"13642884402"},{name:"戚淑敏",dept:"光明计免",post:"护士",phone:"13712291211"},{name:"黎锐坚",dept:"光明计免",post:"行政后勤",phone:"13712922582"},{name:"李晓珊",dept:"疾控办",post:"公卫医师",phone:"13450005565"},{name:"罗燕笑",dept:"中心副主任",post:"医生",phone:"13711861812"},{name:"秦柳平",dept:"中心门诊",post:"医生",phone:"13622628789"},{name:"黄浩昭",dept:"中心办公室",post:"化验",phone:"15017118586"},{name:"付斯洁",dept:"中心门诊",post:"医生",phone:"15989612901"},{name:"扈丹丹",dept:"护理办",post:"护士",phone:"15918383689"},{name:"何运芝",dept:"检验",post:"化验",phone:"13712101516"},{name:"谢水良",dept:"上桥站",post:"医生",phone:"13686258373"},{name:"颜显扬",dept:"余屋站",post:"医生",phone:"15322480891"},{name:"严波",dept:"影像",post:"医生",phone:"13763164919"},{name:"于长江",dept:"中心门诊",post:"医生",phone:"15999754035"},{name:"李晓彤",dept:"疾控办",post:"公卫医师",phone:"15521388819"},{name:"李赋文",dept:"疾控办",post:"公卫医师",phone:"18925753341"},{name:"吴蓉芝",dept:"公卫办",post:"公卫医师",phone:"13760904255"},{name:"江雨萍",dept:"检验",post:"化验",phone:"13790118209"},{name:"霍杏芳",dept:"中心医务办",post:"医生",phone:"13528586083"},{name:"钟雅雯",dept:"温塘站",post:"护士",phone:"13580736500"},{name:"方兆",dept:"中心总务办",post:"管理人员",phone:"13829269516"},{name:"陈锦平",dept:"周屋站",post:"收费",phone:"13580991929"},{name:"余润全",dept:"余屋站",post:"保安",phone:"13532819003"},{name:"潘丽婷",dept:"周屋站",post:"药剂",phone:"13265222888"},{name:"陆琼梅",dept:"东泰站",post:"护士",phone:"13268633540"},{name:"廖琼花",dept:"火炼树站",post:"护士",phone:"13712703682"},{name:"何美玲",dept:"档案室",post:"护士",phone:"18926839989"},{name:"彭暖林",dept:"火炼树站",post:"保安",phone:"13532396793"},{name:"唐明",dept:"中心门诊",post:"医生",phone:"13622681080"},{name:"钟碧梅",dept:"检验",post:"化验",phone:"13711889139"},{name:"蒋红学",dept:"桑园站",post:"医生",phone:"13662854262"},{name:"朱玫慧",dept:"同沙站",post:"医生",phone:"13580853602"},{name:"卢志伟",dept:"中心药剂办",post:"药剂",phone:"13424802078"},{name:"朱湘辉",dept:"牛山站",post:"医生",phone:"13711979432"},{name:"江艳玲",dept:"同沙站",post:"护士",phone:"13728113322"},{name:"何淑贞",dept:"牛山站",post:"护士",phone:"13688947402"},{name:"莫凤青",dept:"中心药剂办",post:"药剂",phone:"13686149225"},{name:"沈秋兰",dept:"温塘站",post:"护士",phone:"15999810179"},{name:"魏燕萍",dept:"中心门诊",post:"护士",phone:"13592766988"},{name:"邓清丽",dept:"周屋站",post:"护士",phone:"13537161836"},{name:"韩超虹",dept:"堑头站",post:"药剂",phone:"13711925700"},{name:"刘容彬",dept:"堑头站",post:"保安",phone:"13729971881"},{name:"钟燕",dept:"桑园站",post:"药剂",phone:"13925594186"},{name:"蓝艳梅",dept:"中心门诊",post:"护士",phone:"13728184132"},{name:"袁锦超",dept:"桑园站",post:"收费",phone:"13798895511"},{name:"戴紧跟",dept:"温塘站",post:"医生",phone:"13549470085"},{name:"包伟党",dept:"中心门诊",post:"医生",phone:"13650082169"},{name:"陈秀霞",dept:"东泰站",post:"护士",phone:"18029029278"},{name:"兰柳岸",dept:"中心医务办",post:"护士",phone:"13728213360"},{name:"丁晓锋",dept:"中心门诊",post:"药剂",phone:"13580960118"},{name:"何嘉玲",dept:"石井站",post:"收费",phone:"15920613282"},{name:"钱树娟",dept:"东泰站",post:"护士",phone:"13528566990"},{name:"袁换桂",dept:"中心门诊",post:"护士",phone:"13580976579"},{name:"卢淑娜",dept:"中心门诊",post:"收费",phone:"13713332468"},{name:"袁映章",dept:"中心总务办",post:"收费",phone:"13412316603"},{name:"利燕泉",dept:"堑头站",post:"护士",phone:"13711868386"},{name:"吴丹丹",dept:"桑园站",post:"护士",phone:"13686297077"},{name:"周耀荣",dept:"周屋站",post:"保安",phone:"13725738112"},{name:"叶炯渠",dept:"中心后勤",post:"司机",phone:"13713088323"},{name:"袁松发",dept:"中心后勤",post:"司机",phone:"13712708426"},{name:"缪沛钦",dept:"同沙站",post:"药剂",phone:"15820986611"},{name:"袁佩君",dept:"中心门诊",post:"药剂",phone:"13763230335"},{name:"钟凤兰",dept:"中心总务办",post:"护士",phone:"13712466022"},{name:"袁毅",dept:"余屋站",post:"护士",phone:"13686619056"},{name:"刘红",dept:"中心医务办",post:"护士",phone:"18929206625"},{name:"杨洁",dept:"石井站",post:"护士",phone:"13712352296"},{name:"钟树明",dept:"同沙科技园",post:"保安",phone:"13559772933"},{name:"彭丽荷",dept:"上桥站",post:"保洁",phone:"18948624386"},{name:"翟海燕",dept:"中心门诊",post:"医生",phone:"13642830330"},{name:"谭罗英",dept:"牛山站",post:"医生",phone:"13712618205"},{name:"邝常青",dept:"火炼树站",post:"收费",phone:"13612711922"},{name:"张伟华",dept:"火炼树站",post:"医生",phone:"13537371221"},{name:"梁桂仪",dept:"梨川站",post:"医生",phone:"13763162707"},{name:"刘积苏",dept:"柏洲边站",post:"保安",phone:"13688922291"},{name:"汪丽娟",dept:"温塘站",post:"医生",phone:"13717399321"},{name:"何伟雪",dept:"余屋站",post:"医生",phone:"13751208273"},{name:"周浪燕",dept:"疾控办",post:"公卫医师",phone:"13416689894"},{name:"蔡建英",dept:"梨川站",post:"保洁",phone:"13549363399"},{name:"邹小丽",dept:"梨川站",post:"护士",phone:"15989675110"},{name:"香巧婵",dept:"中心门诊",post:"护士",phone:"13729925509"},{name:"袁刘锐",dept:"中心后勤",post:"电工",phone:"13669829022"},{name:"李华丽",dept:"东泰站",post:"医生",phone:"13480035608"},{name:"钟玉英",dept:"温塘站",post:"药剂",phone:"13652500883"},{name:"陈美蓉",dept:"中心药剂办",post:"收费",phone:"13423377894"},{name:"卢艳芬",dept:"同沙科技园",post:"医生",phone:"13662877088"},{name:"张玲玲",dept:"柏洲边站",post:"药剂",phone:"15818262314"},{name:"吴利娜",dept:"东泰站",post:"药剂",phone:"13423003370"},{name:"叶嘉伟",dept:"牛山站",post:"药剂",phone:"13686695777"},{name:"邱书燕",dept:"同沙科技园",post:"护士",phone:"15118269792"},{name:"张伟乐",dept:"东泰站",post:"护士",phone:"18038238527"},{name:"曾海仕",dept:"柏洲边站",post:"医生",phone:"13712286933"},{name:"莫翠连",dept:"中心门诊",post:"药剂",phone:"13415963882"},{name:"蔡雪枝",dept:"余屋站",post:"护士",phone:"13712412461"},{name:"徐静仪",dept:"石井站",post:"护士",phone:"18025290051"},{name:"梁方宜",dept:"火炼树站",post:"药剂",phone:"13713340282"},{name:"郑桂鑫",dept:"堑头站",post:"医生",phone:"13538373959"},{name:"谢皓",dept:"中心药剂办",post:"药剂",phone:"15999847846"},{name:"朱妍桦",dept:"火炼树站",post:"护士",phone:"13713046986"},{name:"卢柳荷",dept:"公卫办",post:"公卫医师",phone:"13827208600"},{name:"沈小城",dept:"中心门诊",post:"护士",phone:"13925864669"},{name:"欧彩莲",dept:"中心门诊",post:"药剂",phone:"13711905680"},{name:"梁钻如",dept:"中心门诊",post:"药剂",phone:"13717162692"},{name:"植旭婷",dept:"温塘站",post:"医生",phone:"15920187692"},{name:"林潇",dept:"中心门诊",post:"医生",phone:"13392366727"},{name:"成惠敏",dept:"中心门诊",post:"护士",phone:"13650482662"},{name:"唐显美",dept:"东泰站",post:"医生",phone:"13662855890"},{name:"吴锦霏",dept:"上桥站",post:"药剂",phone:"15818252261"},{name:"徐秀环",dept:"中心医务办",post:"护士",phone:"13902603210"},{name:"谢美兴",dept:"光明站",post:"护士",phone:"13929422224"},{name:"黎文静",dept:"柏洲边站",post:"护士",phone:"13580778462"},{name:"张锦文",dept:"周屋站",post:"护士",phone:"13412282163"},{name:"许利娣",dept:"周屋站",post:"医生",phone:"15017043929"},{name:"陈婉东",dept:"检验",post:"化验",phone:"15217133599"},{name:"李俊霞",dept:"东泰站",post:"化验",phone:"15014973986"},{name:"卢楚婷",dept:"东泰站",post:"药剂",phone:"13560886683"},{name:"钟宝莹",dept:"温塘站",post:"药剂",phone:"13712497343"},{name:"蔡玉贤",dept:"东泰站",post:"保安",phone:"13712045604"},{name:"茹少红",dept:"中心办公室",post:"护士",phone:"13416618212"},{name:"钱葵弟",dept:"中心门诊",post:"护士",phone:"13549339638"},{name:"巫凤玲",dept:"中心门诊",post:"护士",phone:"15992936284"},{name:"袁暖登",dept:"中心后勤",post:"厨师",phone:"13712610123"},{name:"钟燕",dept:"中心门诊",post:"护士",phone:"13688964025"},{name:"邓淑媛",dept:"温塘站",post:"保洁",phone:"13532366880"},{name:"黄应辉",dept:"桑园站",post:"保安",phone:"13809640778"},{name:"方芹",dept:"中心门诊",post:"护士",phone:"15813322679"},{name:"甘树兴",dept:"光明站",post:"医生",phone:"18681144436"},{name:"周桂芬",dept:"中心总务办",post:"医生",phone:"15818355272"},{name:"袁韵珊",dept:"中心门诊",post:"医生",phone:"13713342110"},{name:"祁晓怡",dept:"光明站",post:"医生",phone:"18681198013"},{name:"梁靖茹",dept:"温塘站",post:"药剂",phone:"13925728471"},{name:"曾伟琼",dept:"温塘站",post:"化验",phone:"15767970141"},{name:"黎文君",dept:"中心门诊",post:"护士",phone:"13549270740"},{name:"谢凤娇",dept:"石井站",post:"药剂",phone:"13631399741"},{name:"冯婷",dept:"中心药剂办",post:"药剂",phone:"13686133062"},{name:"陈克勤",dept:"周屋站",post:"医生",phone:"13902622684"},{name:"柯银燕",dept:"上桥站",post:"护士",phone:"15816831662"},{name:"吴凤珍",dept:"东泰站",post:"医生",phone:"18316839886"},{name:"陈晓彤",dept:"余屋站",post:"药剂",phone:"13717389279"},{name:"刘顶球",dept:"石井站",post:"医生",phone:"13631716213"},{name:"梁静",dept:"柏洲边站",post:"护士",phone:"15899959499"},{name:"欧阳湘瑛",dept:"光明站",post:"护士",phone:"13556618660"},{name:"刘小凤",dept:"中心门诊",post:"药剂",phone:"13642875677"},{name:"刘肖雯",dept:"中心门诊",post:"护士",phone:"13332647707"},{name:"黎淑君",dept:"东泰站",post:"药剂",phone:"13450089345"},{name:"骆芳",dept:"同沙站",post:"护士",phone:"15992840360"},{name:"林爱萍",dept:"堑头站",post:"护士",phone:"13560895904"},{name:"黄冬冬",dept:"火炼树站",post:"护士",phone:"13580793922"},{name:"黄嘉仪",dept:"光明站",post:"护士",phone:"15019980933"},{name:"吴亮",dept:"牛山站",post:"医生",phone:"13798725620"},{name:"潘莉",dept:"中心门诊",post:"药剂",phone:"13712348060"},{name:"曾佳美",dept:"东泰站",post:"护士",phone:"13711994552"},{name:"赖铭珍",dept:"桑园站",post:"护士",phone:"15999905352"},{name:"方慧卿",dept:"堑头站",post:"医生",phone:"15920230660"},{name:"阙中桂",dept:"中心门诊",post:"医生",phone:"15920583733"},{name:"肖李梅",dept:"中心门诊",post:"医生",phone:"15918655518"},{name:"莫晓霞",dept:"中心门诊",post:"护士",phone:"15913846927"},{name:"姚嘉明",dept:"疾控办",post:"公卫医师",phone:"17722335032"},{name:"黄媚",dept:"中心门诊",post:"护士",phone:"15820838750"},{name:"钟晓敏",dept:"中心门诊",post:"护士",phone:"15920687123"},{name:"钟雪贞",dept:"温塘站",post:"护士",phone:"13790155738"},{name:"钱梓瑜",dept:"上桥站",post:"护士",phone:"13790583677"},{name:"黄衬兴",dept:"中心后勤",post:"厨工",phone:"13556629522"},{name:"李想",dept:"中心门诊",post:"医生",phone:"13434510370"},{name:"罗娟",dept:"牛山站",post:"医生",phone:"18664963278"},{name:"陈怡",dept:"中心办公室",post:"管理人员",phone:"13929490237"},{name:"张莹",dept:"中心总务办",post:"收费",phone:"13717322082"},{name:"黎颖珊",dept:"中心门诊",post:"收费",phone:"13798806011"},{name:"钱婉玲",dept:"东泰站",post:"收费",phone:"13728329600"},{name:"李艳婵",dept:"余屋站",post:"收费",phone:"13713409620"},{name:"陈仕连",dept:"石井站",post:"医生",phone:"13560174306"},{name:"钟淑珍",dept:"疾控办",post:"公卫医师",phone:"13723581432"},{name:"邱洪",dept:"中心门诊",post:"医生",phone:"18988562511"},{name:"叶晋升",dept:"疾控办",post:"公卫医师",phone:"15521119212"},{name:"谢宝仪",dept:"光明站",post:"收费",phone:"15625508969"},{name:"卢洁莹",dept:"中心门诊",post:"收费",phone:"13751305731"},{name:"卢肖君",dept:"护理办",post:"护士",phone:"13622643242"},{name:"王群",dept:"柏洲边站",post:"护士",phone:"13135205059"},{name:"张洪艳",dept:"中心门诊",post:"护士",phone:"18718824981"},{name:"谢丽姣",dept:"中心门诊",post:"护士",phone:"15899934493"},{name:"宁雅婷",dept:"检验",post:"化验",phone:"15096028087"},{name:"庾钰青",dept:"中心门诊",post:"药剂",phone:"15818228487"},{name:"王晓丽",dept:"同沙科技园",post:"护士",phone:"13537103271"},{name:"陈德娣",dept:"梨川站",post:"护士",phone:"13650230443"},{name:"蔡慧娴",dept:"中心办公室",post:"药剂",phone:"13829226302"},{name:"谭秋鸿",dept:"同沙科技园",post:"药剂",phone:"13686167930"},{name:"钟婷",dept:"中心门诊",post:"护士",phone:"13923040015"},{name:"刘倩",dept:"中心门诊",post:"护士",phone:"15019256943"},{name:"姚冬琴",dept:"石井站",post:"医生",phone:"18565865929"},{name:"袁小芳",dept:"财务室",post:"收费",phone:"13592767021"},{name:"陈婉娥",dept:"堑头站",post:"收费",phone:"13580731111"},{name:"邓玉曼",dept:"上桥站",post:"医生",phone:"13728209266"},{name:"袁伟文",dept:"中心门诊",post:"医生",phone:"13026829985"},{name:"陈梦",dept:"中心门诊",post:"护士",phone:"15015407790"},{name:"陈永杰",dept:"桑园站",post:"护士",phone:"13652696240"},{name:"邓燕飞",dept:"中心医务办",post:"公卫医师",phone:"19907698102"},{name:"陈晓园",dept:"中心办公室",post:"公卫医师",phone:"17307696867"},{name:"刘雨荆",dept:"公卫办",post:"公卫医师",phone:"19907699752"},{name:"陈苏女",dept:"中心门诊",post:"医生",phone:"13751466654"},{name:"谢汉洪",dept:"中心门诊",post:"医生",phone:"15899659465"},{name:"卢佳茜",dept:"中心门诊",post:"护士",phone:"18807094979"},{name:"蒙云霞",dept:"温塘站",post:"护士",phone:"18702536258"},{name:"喻小芳",dept:"中心门诊",post:"护士",phone:"18707951161"},{name:"叶雅雯",dept:"中心门诊",post:"药剂",phone:"13732625891"},{name:"谭桂燕",dept:"温塘站",post:"护士",phone:"13712740007"},{name:"徐佳颖",dept:"牛山站",post:"药剂",phone:"15079097701"},{name:"袁淑英",dept:"中心门诊",post:"药剂",phone:"15521146861"},{name:"李珍花",dept:"梨川站",post:"药剂",phone:"13544755295"},{name:"王杰",dept:"中心门诊",post:"医生",phone:"13042268844"},{name:"方程",dept:"桑园站",post:"医生",phone:"13239913855"},{name:"黄建华",dept:"温塘站",post:"收费",phone:"18028968688"},{name:"袁海东",dept:"中心门诊",post:"收费",phone:"13412455778"},{name:"莫健芳",dept:"牛山站",post:"收费",phone:"137988989966"},{name:"贺露",dept:"中心门诊",post:"护士",phone:"13712471987"},{name:"江琴花",dept:"中心门诊",post:"医生",phone:"13592846771"},{name:"钟岑",dept:"中心门诊",post:"药剂",phone:"13640868317"},{name:"陈静",dept:"牛山站",post:"护士",phone:"18938160106"},{name:"温婉玲",dept:"中心门诊",post:"护士",phone:"13538534484"},{name:"杨锦笑",dept:"堑头站",post:"护士",phone:"13652646265"},{name:"王艳艳",dept:"温塘站",post:"医生",phone:"13827263780"},{name:"林均玉",dept:"堑头站",post:"医生",phone:"13751276367"},{name:"罗光敏",dept:"上桥站",post:"医生",phone:"18819744286"},{name:"黄方圆",dept:"同沙科技园",post:"医生",phone:"13650101222"},{name:"卢奕晨",dept:"桑园站",post:"医生",phone:"13723586449"},{name:"胡慧红",dept:"桑园站",post:"医生",phone:"15818256164"},{name:"林民庭",dept:"东泰站",post:"医生",phone:"18316893308"},{name:"庄远姬",dept:"牛山站",post:"护士",phone:"13790665079"},{name:"何静娴",dept:"同沙科技园",post:"护士",phone:"13713188330"},{name:"纪晓丽",dept:"中心门诊",post:"医生",phone:"15999791942"},{name:"袁仲勋",dept:"中心主任",post:"药剂",phone:"13600292373"},{name:"黄圣霖",dept:"中心门诊",post:"收费",phone:"15920634577"},{name:"刘琴琴",dept:"梨川站",post:"医生",phone:"18778838835"},{name:"朱惠瑜",dept:"中心门诊",post:"医生",phone:"18903037668"},{name:"夏骥",dept:"中心门诊",post:"医生",phone:"13712032794"},{name:"胡跃琴",dept:"中心门诊",post:"医生",phone:"18840175939"},{name:"罗浩田",dept:"石井站",post:"医生",phone:"15015263581"},{name:"李浩源",dept:"温塘站",post:"医生",phone:"15625059119"},{name:"游子琳",dept:"中心门诊",post:"医生",phone:"17322100782"},{name:"廖佩炎",dept:"火炼树站",post:"医生",phone:"13071336688"},{name:"胡志强",dept:"中心门诊",post:"医生",phone:"18929106263"},{name:"郑欢欢",dept:"影像",post:"医生",phone:"15016813136"},{name:"蒋艳平",dept:"中心门诊",post:"医生",phone:"15274949210"},{name:"余娟娟",dept:"中心门诊",post:"医生",phone:"19898000417"},{name:"肖佩佩",dept:"火炼树站",post:"医生",phone:"13202960716"},{name:"陈羽佳",dept:"中心门诊",post:"医生",phone:"17790941236"},{name:"尹雪莹",dept:"中心门诊",post:"医生",phone:"13712737205"},{name:"吴丽慧",dept:"中心办公室",post:"管理人员",phone:"13592724720"},{name:"李嫣",dept:"中心门诊",post:"医生",phone:"18229635972"},{name:"王安怡",dept:"中心门诊",post:"医生",phone:"13149331612"},{name:"罗蕴灵",dept:"东泰站",post:"医生",phone:"18922980772"},{name:"莫勇健",dept:"中心门诊",post:"医生",phone:"13798919321"},{name:"黄建",dept:"中心门诊",post:"医生",phone:"13212624714"},{name:"李斌",dept:"中心门诊",post:"医生",phone:"13580972706"},{name:"曹玲",dept:"中心门诊",post:"医生",phone:"15574990905"},{name:"卢丽慧",dept:"中心门诊",post:"护士",phone:"13660936259"},{name:"叶振威",dept:"中心门诊",post:"药剂",phone:"13929486923"},{name:"陈彦",dept:"中心门诊",post:"药剂",phone:"17819843442"},{name:"曾素溶",dept:"中心门诊",post:"护士",phone:"13530971712"},{name:"陈满成",dept:"中心门诊",post:"医生",phone:"13592850620"},{name:"刘秋波",dept:"光明站",post:"医生",phone:"19860019537"},{name:"龙祖凡",dept:"中心门诊",post:"医生",phone:"13026705972"},{name:"刘丽兰",dept:"中心门诊",post:"康复",phone:"18211543004"},{name:"任华连",dept:"中心计免",post:"护士",phone:"18929427146"},{name:"韦小梅",dept:"光明计免",post:"护士",phone:"13480476760"},{name:"余润娇",dept:"中心计免",post:"公卫医师",phone:"13713140282"},{name:"谢丽娟",dept:"中心儿保",post:"护士",phone:"13532970505"},{name:"陈沛玲",dept:"公卫办",post:"公卫医师",phone:"13532449500"},{name:"丁栩红",dept:"光明儿保",post:"公卫医师",phone:"15818390553"},{name:"钟志钦",dept:"公卫办",post:"公卫医师",phone:"15920678261"},{name:"蔡福珍",dept:"光明计免",post:"公卫医师",phone:"13480461328"},{name:"何启安",dept:"公卫办",post:"公卫医师",phone:"15816832319"},{name:"陈伟欢",dept:"中心计免",post:"护士",phone:"15999831062"},{name:"陈丽锦",dept:"柏洲边计免",post:"护士",phone:"13790138900"},{name:"刘丽国",dept:"中心儿保",post:"护士",phone:"13553808376"},{name:"黄水娟",dept:"中心计免",post:"护士",phone:"18926833191"},{name:"戴沛如",dept:"中心计免",post:"护士",phone:"15818328903"},{name:"王爽",dept:"公卫办",post:"公卫医师",phone:"13532765609"},{name:"尹伟茹",dept:"中心儿保",post:"医生",phone:"15107690902"},{name:"王小丽",dept:"柏洲边计免",post:"公卫医师",phone:"15625590776"},{name:"卢海欣",dept:"公卫办",post:"公卫医师",phone:"13650289548"},{name:"邓子文",dept:"公卫办",post:"公卫医师",phone:"13267182286"},{name:"关碧榕",dept:"公卫办",post:"公卫医师",phone:"18819749484"},{name:"冯倩",dept:"中心计免",post:"公卫医师",phone:"15818480245"},{name:"李洪花",dept:"公卫办",post:"公卫医师",phone:"13728374572"},{name:"张家华",dept:"中心儿保",post:"公卫医师",phone:"13392303433"},{name:"罗敏仪",dept:"公卫办",post:"公卫医师",phone:"15016765564"},{name:"袁丽茵",dept:"光明计免",post:"公卫医师",phone:"15818227529"},{name:"徐美玲",dept:"中心儿保",post:"公卫医师",phone:"18826247310"},{name:"陈雅婷",dept:"柏洲边儿保",post:"公卫医师",phone:"13532433098"},{name:"倪琳",dept:"中心药剂办",post:"药剂",phone:"13538517761"},{name:"周燮峰",dept:"总务办",post:"管理人员",phone:"13560886747"},{name:"袁淑贞",dept:"财务室",post:"管理人员",phone:"13726431120"},{name:"孙光绪",dept:"中心门诊",post:"保安",phone:""},{name:"徐晓林",dept:"中心门诊",post:"保安",phone:""},{name:"李茂辉",dept:"中心门诊",post:"保安",phone:""},{name:"尹铁仔",dept:"中心门诊",post:"保安",phone:""},{name:"粟正义",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"严明",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"谢帆",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"张涛",dept:"中心门诊",post:"中级保安岗位",phone:""},{name:"胡德州",dept:"光明",post:"保安",phone:""},{name:"李翠兰",dept:"中心门诊",post:"保洁",phone:""},{name:"曹桂兰",dept:"中心门诊",post:"保洁",phone:""},{name:"黄凤章",dept:"中心门诊",post:"保洁",phone:""},{name:"叶福嫦",dept:"中心门诊",post:"保洁",phone:""},{name:"林琼兰",dept:"中心门诊",post:"保洁",phone:""},{name:"刘新凤",dept:"中心门诊",post:"保洁",phone:""},{name:"黄玉莲",dept:"中心门诊",post:"保洁",phone:""},{name:"张祝香",dept:"中心门诊",post:"保洁",phone:""},{name:"宋培艳",dept:"中心门诊",post:"保洁",phone:""},{name:"方培芝",dept:"中心门诊",post:"保洁",phone:""},{name:"杨旻",dept:"中心门诊",post:"保洁",phone:""},{name:"赖秀凝",dept:"中心门诊",post:"保洁",phone:""},{name:"蒋伟英",dept:"中心门诊",post:"保洁",phone:""},{name:"刘付铜英",dept:"中心门诊",post:"中心厨房保洁",phone:""},{name:"莫明燕",dept:"下桥站",post:"保洁",phone:""},{name:"吴兰英",dept:"牛山站",post:"保洁",phone:""},{name:"徐伙连",dept:"东泰站",post:"保洁",phone:""},{name:"黄富荣",dept:"余屋站",post:"保洁",phone:""},{name:"黄鹤",dept:"同沙站",post:"保洁",phone:""},{name:"袁衬兴",dept:"同沙科技园站",post:"保洁",phone:""},{name:"李美金",dept:"光明站",post:"保洁",phone:""},{name:"叶少微",dept:"石井",post:"保洁",phone:""},{name:"罗洁敏",dept:"堑头站",post:"保洁",phone:""},{name:"桑玉香",dept:"火炼树站",post:"保洁",phone:""},{name:"黄伟珍",dept:"桑园站",post:"保洁",phone:""},{name:"袁葵弟",dept:"周屋站",post:"保洁",phone:""},{name:"刘银爱",dept:"柏洲边站",post:"保洁",phone:""}
 ];
 
 // ===== State =====
@@ -3458,11 +527,12 @@ async function sbReq(method, path, body){
 async function getAllRecords(date){
   try{
     const q = date ? '?date=eq.'+date+'&select=*&order=created_at.desc':'?select=*&order=created_at.desc';
-    return await sbReq('GET','/temp_log'+q);
+    const res = await sbReq('GET','/temp_log'+q);
+    return (res||[]).map(normalizeRecord);
   }catch(e){
     console.error('Supabase读取失败，回退本地存储',e);
     const all = JSON.parse(localStorage.getItem('dc_temp_records')||'[]');
-    return date?all.filter(r=>r.date===date):all;
+    return (date?all.filter(r=>r.date===date):all).map(normalizeRecord);
   }
 }
 
@@ -3516,7 +586,6 @@ async function switchToPage(page){
   $('page-'+page).classList.add('active','fade-in');
   setTimeout(()=>document.querySelectorAll('.page').forEach(p=>p.classList.remove('fade-in')),300);
   if(page==='admin') await renderAdmin();
-  if(page==='roster') renderRoster('');
 }
 
 function showAuth(targetPage){
@@ -3694,21 +763,13 @@ tempInput.addEventListener('input', ()=>{
     // Auto-check fever chip
     selectedSymptoms.add('发热');
     $('chipFever').classList.add('active');
-    $('remarkHint').textContent = '⚠ 您有发热，请填写是否已就诊、就诊机构及诊断结果';
+    $('remarkHint').textContent = '⚠ 严格落实逢热必检，如有发热，请到中心/站点挂号就诊做两热检测；若在外镇/医疗机构就诊，请说明就诊情况及检测结果';
   } else {
     tempStatus.innerHTML = '<span class="temp-normal">✓ 体温正常</span>';
     $('chipFever').classList.remove('active');
     selectedSymptoms.delete('发热');
-    $('remarkHint').textContent = '如有发热，请填写是否已就诊、就诊机构及诊断结果';
+    $('remarkHint').textContent = '严格落实逢热必检，如有发热，请到中心/站点挂号就诊做两热检测；若在外镇/医疗机构就诊，请说明就诊情况及检测结果';
   }
-});
-
-// Quick temp buttons
-document.querySelectorAll('#tempQuick button').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    tempInput.value = btn.dataset.v;
-    tempInput.dispatchEvent(new Event('input'));
-  });
 });
 
 // ===== Form: Symptom Toggle =====
@@ -4077,7 +1138,7 @@ async function renderAdmin(){
   const submittedNames = new Set(records.map(r=>`${r.name}|${r.dept}`));
   const allPeople = filterDept ? ROSTER.filter(r=>r.dept===filterDept) : ROSTER;
   const unsubmitted = allPeople.filter(r=>!submittedNames.has(`${r.name}|${r.dept}`));
-  const abnormal = records.filter(r=>r.fever || r.hasSymptom || r.epi.some(e=>e.includes('近14天风险地区旅居史')));
+  const abnormal = records.filter(r=>r.fever || r.hasSymptom || (r.symptoms && r.symptoms.length>0) || (r.epi && r.epi.some(e=>e.includes('近14天风险地区旅居史'))));
   
   // Stats
   $('statTotal').textContent = allPeople.length;
@@ -4154,7 +1215,7 @@ function renderDataItem(r, isAbnormal=false){
   }
 
   return `
-    <div class="data-item ${isAbnormal?'abnormal':'normal'}">
+    <div class="data-item ${isAbnormal?'abnormal':'normal'}" data-record='${JSON.stringify(r).replace(/'/g,"&#39;")}' onclick="showRecordDetail(this)" style="cursor:pointer">
       <div class="di-top">
         <div class="di-name">${r.name}<span class="di-dept">${r.dept} · ${r.post}</span></div>
         <div class="di-temp ${tempClass}">${r.temp}℃</div>
@@ -4164,6 +1225,116 @@ function renderDataItem(r, isAbnormal=false){
       ${remarkHtml}
     </div>
   `;
+}
+
+// Show stat list modal
+function showStatList(type){
+  const date = (typeof adminDate !== 'undefined' && adminDate ? adminDate.value : '') || todayStr();
+  getAllRecords(date).then(records => {
+    let title = '', list = [];
+    if(type === 'submitted'){
+      title = '已上报人员';
+      list = records;
+    } else if(type === 'pending'){
+      const submittedNames = new Set(records.map(r=>r.name+'|'+r.dept));
+      const allPeople = ROSTER;
+      list = allPeople.filter(r=>!submittedNames.has(r.name+'|'+r.dept));
+      title = '未上报人员';
+    } else if(type === 'abnormal'){
+      list = records.filter(r=>r.fever || r.hasSymptom || (r.epi && r.epi.some(e=>e.includes('近14天风险地区旅居史'))));
+      title = '异常人员';
+    }
+    let html = '<div class="modal-overlay" onclick="this.remove()" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;">';
+    html += '<div style="background:#fff;border-radius:12px;width:90%;max-width:400px;max-height:70vh;overflow-y:auto;padding:16px;">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+    html += '<h3>'+title+'（'+list.length+'人）</h3>';
+    html += '<span onclick="this.closest(\'.modal-overlay\').remove()" style="font-size:20px;cursor:pointer;color:#999;">\u00d7</span>';
+    html += '</div>';
+    // Group all lists by department
+    const byDept = {};
+    list.forEach(p=>{
+      if(!byDept[p.dept]) byDept[p.dept] = [];
+      byDept[p.dept].push(p);
+    });
+    Object.keys(byDept).sort().forEach(dept=>{
+      html += '<div style="font-weight:bold;color:#333;margin:8px 0 4px;font-size:13px;">'+dept+'（'+byDept[dept].length+'人）</div>';
+      byDept[dept].forEach(r=>{
+        const tempClass = r.fever ? 'color:#e74c3c;font-weight:bold' : 'color:#333';
+        let symptoms = '';
+        if(r.hasSymptom && r.symptoms && r.symptoms.length>0) symptoms = r.symptoms.join('、');
+        const clickHandler = type === 'pending' ? '' : 'onclick="this.closest(\'.modal-overlay\').remove();showRecordDetailById(\''+(r.date||'')+'\',\''+(r.name||'')+'\',\''+(r.dept||'')+'\')"';
+        html += '<div '+clickHandler+' style="display:flex;justify-content:space-between;align-items:center;padding:6px 8px;border-bottom:1px solid #f0f0f0;'+(type==='pending'?'':'cursor:pointer;')+'">';
+        html += '<div><span style="font-weight:600;">'+r.name+'</span>'+(type!=='pending'?'<span style="color:#888;font-size:12px;margin-left:6px;">'+(r.post||'')+'</span>':'<span style="color:#888;font-size:12px;margin-left:6px;">'+(r.post||'')+'</span>')+'</div>';
+        if(type !== 'pending'){
+          html += '<div style="'+tempClass+'">'+r.temp+'℃</div>';
+          if(symptoms) html += '<div style="font-size:12px;color:#e74c3c;flex-basis:100%;margin-top:2px;">'+symptoms+'</div>';
+        } else {
+          html += '<div></div>';
+        }
+        html += '</div>';
+      });
+    });
+    html += '</div></div>';
+    document.body.insertAdjacentHTML('beforeend', html);
+  });
+}
+
+// Show record detail by id (re-fetch from server)
+function showRecordDetailById(date, name, dept){
+  getAllRecords(date).then(records=>{
+    const r = records.find(x=>x.name===name && x.dept===dept);
+    if(r) showRecordDetailObj(r);
+  });
+}
+
+// Show record detail from object
+function showRecordDetailObj(r){
+  let html = '<div class="modal-overlay" onclick="this.remove()" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;">';
+  html += '<div style="background:#fff;border-radius:12px;width:90%;max-width:400px;max-height:80vh;overflow-y:auto;padding:16px;">';
+  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  html += '<h3>填报明细</h3>';
+  html += '<span onclick="this.closest(\'.modal-overlay\').remove()" style="font-size:20px;cursor:pointer;color:#999;">\u00d7</span>';
+  html += '</div>';
+
+  const tempClass = r.fever ? 'color:#e74c3c;font-weight:bold' : 'color:#333';
+  html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">姓名</span><div style="font-size:16px;font-weight:600;">'+r.name+'</div></div>';
+  html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">部门/岗位</span><div>'+(r.dept||'')+' \u00b7 '+(r.post||'')+'</div></div>';
+  html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">日期</span><div>'+(r.date||'')+'</div></div>';
+  html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">体温</span><div style="'+tempClass+';font-size:18px;">'+r.temp+'\u2103'+(r.fever?' \u26a0\u53d1\u70ed':' \u2713\u6b63\u5e38')+'</div></div>';
+
+  const hasSymptoms = r.hasSymptom || (r.symptoms && r.symptoms.length>0);
+  if(hasSymptoms || (r.otherSymptom && r.otherSymptom.trim())){
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">症状</span><div style="color:#e74c3c;">';
+    if(r.symptoms && r.symptoms.length>0) html += r.symptoms.join('、');
+    if(r.otherSymptom && r.otherSymptom.trim()) html += (r.symptoms && r.symptoms.length>0?'、':'')+r.otherSymptom;
+    html += '</div></div>';
+  } else {
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">症状</span><div style="color:#27ae60;">无不适</div></div>';
+  }
+
+  if(r.epi && r.epi.length>0){
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">流行病学史</span><div>'+r.epi.join('、')+'</div></div>';
+  }
+  if(r.travelDetail){
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">旅居详情</span><div>'+r.travelDetail+'</div></div>';
+  }
+  if(r.leaveGZDetail){
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">离莞详情</span><div>'+r.leaveGZDetail+'</div></div>';
+  }
+  if(r.remark){
+    html += '<div style="margin-bottom:8px;"><span style="color:#888;font-size:13px;">备注</span><div style="background:#fff8e1;padding:8px;border-radius:6px;">'+r.remark+'</div></div>';
+  }
+
+  html += '</div></div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+// Make renderDataItem items clickable
+function showRecordDetail(el){
+  try{
+    const data = JSON.parse(el.getAttribute('data-record'));
+    showRecordDetailObj(data);
+  }catch(e){ console.error(e); }
 }
 
 // ===== Export to CSV =====
@@ -4186,7 +1357,7 @@ $('exportBtn').addEventListener('click', async ()=>{
     r.travelDetail||'',
     (r.epi||[]).filter(e=>!e.includes('风险地区旅居史')).join('/'),
     r.remark,
-    r.created_at || r.submittedAt
+    (()=>{ const t = r.created_at || r.submittedAt; if(!t) return ''; const d = new Date(t); const pad=n=>String(n).padStart(2,'0'); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds()); })()
   ]);
   
   let csv = '\uFEFF' + headers.join(',') + '\n';
@@ -4207,37 +1378,88 @@ $('exportBtn').addEventListener('click', async ()=>{
   showToast('导出成功', '✓');
 });
 
-// ===== Roster Page =====
-const rosterSearch = $('rosterSearch');
-rosterSearch.addEventListener('input', ()=>{
-  renderRoster(rosterSearch.value.trim());
-});
+// ===== My History Page =====
+const historySearch = $('historySearch');
+const historyBtn = $('historyBtn');
+let historyTimer = null;
 
-function renderRoster(query){
-  let list = ROSTER;
-  if(query){
-    list = ROSTER.filter(r=>
-      r.name.includes(query) || r.dept.includes(query) || r.post.includes(query)
-    );
-  }
-  const el = $('rosterList');
-  if(list.length === 0){
-    el.innerHTML = '<div class="empty"><p>未找到匹配人员</p></div>';
-    return;
-  }
-  el.innerHTML = list.map(r=>`
-    <div class="roster-item">
-      <div>
-        <div class="ri-name">${r.name}</div>
-        <div class="ri-info">${r.dept} · ${r.post}</div>
-      </div>
-      <div class="ri-phone">${r.phone||'—'}</div>
-    </div>
-  `).join('');
+function doHistorySearch(){
+  const keyword = historySearch.value.trim();
+  searchHistory(keyword);
 }
 
-// Init
-renderRoster('');
+historySearch.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    doHistorySearch();
+  }
+});
+if(historyBtn){
+  historyBtn.addEventListener('click', doHistorySearch);
+}
+
+// Normalize Supabase lowercase field names to camelCase used by UI
+function normalizeRecord(r){
+  const symptoms = r.symptoms || [];
+  const rawHasSymptom = r.hasSymptom !== undefined ? r.hasSymptom : r.hassymptom;
+  return {
+    date: r.date, name: r.name, dept: r.dept, post: r.post, phone: r.phone,
+    temp: r.temp, fever: r.fever,
+    hasSymptom: rawHasSymptom === true || symptoms.length > 0,
+    symptoms: symptoms,
+    epi: r.epi || [],
+    hasTravelRisk: r.hasTravelRisk !== undefined ? r.hasTravelRisk : r.hastravelrisk,
+    travelDetail: r.travelDetail !== undefined ? r.travelDetail : r.traveldetail,
+    leaveGZDetail: r.leaveGZDetail !== undefined ? r.leaveGZDetail : r.leavegzdetail,
+    otherSymptom: r.otherSymptom !== undefined ? r.otherSymptom : r.othersymptom,
+    remark: r.remark,
+    created_at: r.created_at, submittedAt: r.submittedAt
+  };
+}
+
+async function searchHistory(keyword){
+  const el = $('historyList');
+  if(!keyword){
+    el.innerHTML = '<div class="empty" style="padding:40px 20px;text-align:center;color:#888;"><p>请输入您的姓名查看填报记录</p><p style="font-size:12px;margin-top:8px;color:#bbb;">仅可查看本人填报记录</p></div>';
+    return;
+  }
+  el.innerHTML = '<div class="empty" style="padding:40px 20px;text-align:center;color:#888;"><p>⏳ 查询中...</p></div>';
+  try{
+    // Use exact match (eq) instead of fuzzy match (ilike) to prevent viewing others' records
+    const res = await sbReq('GET','/temp_log?name=eq.'+encodeURIComponent(keyword)+'&select=*&order=created_at.desc');
+    const records = (res||[]).map(normalizeRecord);
+    if(records.length === 0){
+      el.innerHTML = '<div class="empty" style="padding:40px 20px;text-align:center;color:#888;"><p>未找到"'+keyword+'"的填报记录</p><p style="font-size:12px;margin-top:8px;color:#bbb;">请确认姓名与填报时一致</p></div>';
+      return;
+    }
+    el.innerHTML = '<div style="padding:8px 12px;background:#f0fdf4;color:#15803d;font-size:13px;border-radius:6px;margin-bottom:8px;">共 '+records.length+' 条记录</div>';
+    el.innerHTML += records.map(r=>{
+      const tempClass = r.fever ? 'fever' : 'normal';
+      let symptomsHtml = '';
+      if(r.hasSymptom && r.symptoms && r.symptoms.length > 0){
+        symptomsHtml = '<div class="di-symptoms">'+r.symptoms.map(s=>'<span class="badge fever">'+s+'</span>').join('')+'</div>';
+      }
+      let epiHtml = '';
+      if(r.epi && r.epi.length > 0){
+        epiHtml = '<div class="di-info"><span>流行病学史: '+r.epi.join('、')+'</span></div>';
+      }
+      let remarkHtml = '';
+      if(r.remark){
+        remarkHtml = '<div class="di-remark">备注: '+r.remark+'</div>';
+      }
+      let timeStr = '';
+      if(r.created_at){
+        const d = new Date(r.created_at);
+        const pad=n=>String(n).padStart(2,'0');
+        timeStr = pad(d.getHours())+':'+pad(d.getMinutes());
+      }
+      return '<div class="data-item '+(r.fever?'abnormal':'normal')+'" data-record=\''+JSON.stringify(r).replace(/'/g,"&#39;")+'\' onclick="showRecordDetail(this)" style="cursor:pointer"><div class="di-top"><div class="di-name">'+r.name+'<span class="di-dept">'+(r.dept||'')+' · '+(r.post||'')+'</span></div><div class="di-temp '+tempClass+'">'+r.temp+'℃</div></div><div class="di-info"><span>日期: '+(r.date||'')+(timeStr?' '+timeStr:'')+'</span></div>'+symptomsHtml+epiHtml+remarkHtml+'</div>';
+    }).join('');
+  }catch(e){
+    el.innerHTML = '<div class="empty" style="padding:40px 20px;text-align:center;color:#888;"><p>查询失败，请稍后重试</p></div>';
+  }
+}
+
 // Remove lock if already authenticated
 if(isAdmin){
   $('tabAdmin').classList.remove('locked');
