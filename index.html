@@ -805,13 +805,6 @@ $('chipFever').addEventListener('click', ()=>{
    toggleChip($('chipFever'), '发热');
  });
 
- document.querySelectorAll('.symptom-group .sub-chip').forEach(btn=>{
-   btn.addEventListener('click', ()=>{
-     const symptom = btn.dataset.s;
-     toggleChip(btn, symptom);
-   });
- });
-
  $('chipRash').addEventListener('click', ()=>{
   toggleChip($('chipRash'), '皮疹');
 });
