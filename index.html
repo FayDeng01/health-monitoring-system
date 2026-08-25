@@ -292,28 +292,22 @@ input:focus,select:focus,textarea:focus{outline:none}
             </div>
           </div>
           <div class="symptom-group">
-            <div class="symptom-group-label">三红（面/颈/胸部潮红）</div>
-            <div class="symptom-chips">
-              <button class="chip" id="chipRed">三红症状</button>
-            </div>
-            <div class="chip-detail" id="chipRedDetail">
-              <button class="sub-chip" data-s="面部潮红">面部潮红</button>
-              <button class="sub-chip" data-s="颈部潮红">颈部潮红</button>
-              <button class="sub-chip" data-s="胸部潮红">胸部潮红</button>
-            </div>
-          </div>
-          <div class="symptom-group">
-            <div class="symptom-group-label">三痛（头/眼眶/肌肉关节）</div>
-            <div class="symptom-chips">
-              <button class="chip" id="chipPain">三痛症状</button>
-            </div>
-            <div class="chip-detail" id="chipPainDetail">
-              <button class="sub-chip" data-s="头痛">头痛</button>
-              <button class="sub-chip" data-s="眼眶痛">眼眶痛</button>
-              <button class="sub-chip" data-s="肌肉酸痛">肌肉酸痛</button>
-              <button class="sub-chip" data-s="关节痛">关节痛</button>
-            </div>
-          </div>
+             <div class="symptom-group-label">三红（面/颈/胸部潮红）</div>
+             <div class="symptom-chips">
+               <button class="sub-chip" data-s="面部潮红">面部潮红</button>
+               <button class="sub-chip" data-s="颈部潮红">颈部潮红</button>
+               <button class="sub-chip" data-s="胸部潮红">胸部潮红</button>
+             </div>
+           </div>
+           <div class="symptom-group">
+             <div class="symptom-group-label">三痛（头/眼眶/肌肉关节）</div>
+             <div class="symptom-chips">
+               <button class="sub-chip" data-s="头痛">头痛</button>
+               <button class="sub-chip" data-s="眼眶痛">眼眶痛</button>
+               <button class="sub-chip" data-s="肌肉酸痛">肌肉酸痛</button>
+               <button class="sub-chip" data-s="关节痛">关节痛</button>
+             </div>
+           </div>
           <div class="symptom-group">
             <div class="symptom-group-label">皮疹</div>
             <div class="symptom-chips">
@@ -606,8 +600,7 @@ $('authBtn').addEventListener('click', ()=>{
     isAdmin = true;
     sessionStorage.setItem('dc_admin_auth', '1');
     $('tabAdmin').classList.remove('locked');
-    $('tabRoster').classList.remove('locked');
-    closeAuth();
+     closeAuth();
     showToast('验证成功', '✓');
     if(pendingPage) switchToPage(pendingPage);
   } else {
@@ -627,10 +620,10 @@ $('authCancel').addEventListener('click', closeAuth);
 document.querySelectorAll('.tabbar button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     const page = btn.dataset.page;
-    if((page === 'admin' || page === 'roster') && !isAdmin){
-      showAuth(page);
-      return;
-    }
+     if(page === 'admin' && !isAdmin){
+       showAuth(page);
+       return;
+     }
     switchToPage(page);
   });
 });
@@ -809,22 +802,17 @@ btnAbnormal.addEventListener('click', ()=>setSymptomMode('abnormal'));
 
 // Symptom chips
 $('chipFever').addEventListener('click', ()=>{
-  toggleChip($('chipFever'), '发热');
-});
+   toggleChip($('chipFever'), '发热');
+ });
 
-$('chipRed').addEventListener('click', ()=>{
-  const chip = $('chipRed');
-  const detail = $('chipRedDetail');
-  toggleGroupChip(chip, detail, ['面部潮红','颈部潮红','胸部潮红']);
-});
+ document.querySelectorAll('.symptom-group .sub-chip').forEach(btn=>{
+   btn.addEventListener('click', ()=>{
+     const symptom = btn.dataset.s;
+     toggleChip(btn, symptom);
+   });
+ });
 
-$('chipPain').addEventListener('click', ()=>{
-  const chip = $('chipPain');
-  const detail = $('chipPainDetail');
-  toggleGroupChip(chip, detail, ['头痛','眼眶痛','肌肉酸痛','关节痛']);
-});
-
-$('chipRash').addEventListener('click', ()=>{
+ $('chipRash').addEventListener('click', ()=>{
   toggleChip($('chipRash'), '皮疹');
 });
 
@@ -1462,9 +1450,8 @@ async function searchHistory(keyword){
 
 // Remove lock if already authenticated
 if(isAdmin){
-  $('tabAdmin').classList.remove('locked');
-  $('tabRoster').classList.remove('locked');
-}
+   $('tabAdmin').classList.remove('locked');
+ }
 </script>
 
 
